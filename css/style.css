@@ -1,15 +1,30 @@
 body {
-    margin: 0 150px 50px 150px;
+    margin: 0 150px;
     background-color: rgb(30, 30, 30);
     color: white;
 }
 
-img {
-    cursor: pointer;
+footer {
+    border-top: 1px solid rgb(80, 80, 80);
+    margin-top: 70px;
+    padding-top: 20px;
+    text-align: center;
+    height: 140px;
+    background-color: rgb(30, 30, 30);
 }
 
-h2 {
-    margin-top: 40px;
+#github-logo {
+    margin-top: 5px;
+    height: 50px;
+}
+
+#github-logo:hover {
+    margin-top: 0;
+    height: 60px;
+}
+
+img {
+    cursor: pointer;
 }
 
 button {
@@ -24,20 +39,27 @@ button:hover {
     background-color: rgb(20, 20, 20);
 }
 
-#genre {
-    margin-top: 30px;
+.movie-poster {
+    width: 200px;
+    height: 300px
+}
+
+#best-movie, .carousel {
     margin-bottom: 50px;
-    color:rgb(120, 120, 120);
+}
+
+#genre {
+    text-transform: uppercase;
+    margin: 80px 0;
+    color:rgb(180, 180, 180);
     text-align: center;
     text-decoration: underline;
     text-underline-offset: 15px;
 }
 
 #navbar {
-    margin: 0;
-    padding: 20px 50px 20px 20px;
-    list-style-type: none;
-    background-color: black;
+    padding: 50px 50px 20px 20px;
+    background-color: rgb(30, 30, 30);
     display: flex;
 }
 
@@ -54,11 +76,11 @@ button:hover {
 .navbar-link {
     color: white;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 23px;
     margin-right: 50px;
 }
 
-.navbar-link:hover {
+#home:hover {
     text-decoration: underline;
     text-underline-offset: 8px;
 }
@@ -71,18 +93,18 @@ button:hover {
     display: none;
     position: absolute;
     background-color: rgb(80, 80, 80);
-    width: 157px;
+    width: 165px;
     padding-bottom: 10px;
 }
 
 .dropdown__content div {
-    background-color: black;
+    background-color: rgb(30, 30, 30);
     height: 10px;
 }
 
 .dropdown__content a {
     color: rgb(180, 180, 180);
-    font-size: 17px;
+    font-size: 20px;
     padding: 10px 10px 5px 10px;
     text-decoration: none;
     display: block;
@@ -100,19 +122,19 @@ button:hover {
     top: 0;
     height: 100%;
     width: 100%;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0,0,0,0.6);
     overflow: auto;
 }
 
 #modal-content {
-    margin: 5% auto;
+    margin: 2% auto;
     width: 60%;
-    min-width: 400px;
-    max-width: 700px;
+    min-width: 600px;
+    max-width: 800px;
 }
 
 #modal-header {
-    background: rgb(50, 50, 50);
+    background: rgb(80, 80, 80);
     padding: 10px 10px 10px 20px;
 }
 
@@ -133,12 +155,12 @@ button:hover {
 }
 
 #modal-header p {
-    color: rgb(180, 180, 180);
+    color: rgb(200, 200, 200);
 }
   
 #modal-body {
     color: rgb(30, 30, 30);
-    background-color: rgb(150, 150, 150);
+    background-color: rgb(200, 200, 200);
     padding: 20px 30px 30px 30px;
 }
 
@@ -150,12 +172,7 @@ button:hover {
 #modal-body hr {
     height: 1px;
     border: none;
-    background-color: rgb(120, 120, 120);
-}
-
-#modal-body img {
-    width: 200px;
-    height: 300px;
+    background-color: rgb(150, 150, 150);
 }
 
 #modal-body div {
@@ -180,8 +197,6 @@ button:hover {
 }
 
 #best-movie img {
-    width: 200px;
-    height: 300px;
     margin-right: 20px;
 }
 
@@ -211,6 +226,7 @@ button:hover {
     overflow: hidden;
     max-width: 90%;
     margin: 0 50px;
+    
 }
 
 .carousel__image-list {
@@ -220,13 +236,11 @@ button:hover {
 
 .carousel img {
     display: inline-block;
-    width: 200px;
-    height: 300px;
 }
 
 .carousel button {
-    margin: 110px 0;
-    padding-top: 5px;
-    padding-bottom: 3px;
+    font-size: 20px;
+    margin: 120px 0;
+    padding: 5px 8px 3px 8px;
     border-radius: 7px;
 }

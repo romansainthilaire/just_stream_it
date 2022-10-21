@@ -1,0 +1,232 @@
+body {
+    margin: 0 150px 50px 150px;
+    background-color: rgb(30, 30, 30);
+    color: white;
+}
+
+img {
+    cursor: pointer;
+}
+
+h2 {
+    margin-top: 40px;
+}
+
+button {
+    color: rgb(200, 200, 200);
+    background-color: rgb(30, 30, 30);
+    border: none;
+}
+
+button:hover {
+    cursor: pointer;
+    color: white;
+    background-color: rgb(20, 20, 20);
+}
+
+#genre {
+    margin-top: 30px;
+    margin-bottom: 50px;
+    color:rgb(120, 120, 120);
+    text-align: center;
+    text-decoration: underline;
+    text-underline-offset: 15px;
+}
+
+#navbar {
+    margin: 0;
+    padding: 20px 50px 20px 20px;
+    list-style-type: none;
+    background-color: black;
+    display: flex;
+}
+
+#logo {
+    width: 300px;
+}
+
+#navbar > div {
+    margin-left: auto;
+    align-self: center;
+    display: flex;
+}
+
+.navbar-link {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    margin-right: 50px;
+}
+
+.navbar-link:hover {
+    text-decoration: underline;
+    text-underline-offset: 8px;
+}
+
+.dropdown:hover .dropdown__content {
+    display: block;
+}
+
+.dropdown__content {
+    display: none;
+    position: absolute;
+    background-color: rgb(80, 80, 80);
+    width: 157px;
+    padding-bottom: 10px;
+}
+
+.dropdown__content div {
+    background-color: black;
+    height: 10px;
+}
+
+.dropdown__content a {
+    color: rgb(180, 180, 180);
+    font-size: 17px;
+    padding: 10px 10px 5px 10px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown__content a:hover {
+    color: white;
+    cursor: pointer;
+}
+
+#modal {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.5);
+    overflow: auto;
+}
+
+#modal-content {
+    margin: 5% auto;
+    width: 60%;
+    min-width: 400px;
+    max-width: 700px;
+}
+
+#modal-header {
+    background: rgb(50, 50, 50);
+    padding: 10px 10px 10px 20px;
+}
+
+#modal-header img {
+    filter: invert(49%) sepia(0%) saturate(0%) hue-rotate(319deg) brightness(96%) contrast(96%);
+    float: right;
+}
+  
+#modal-header img:hover {
+    filter: invert(97%) sepia(100%) saturate(13%) hue-rotate(191deg) brightness(102%) contrast(106%);
+    text-decoration: none;
+    cursor:  pointer;
+}
+
+#modal-header h3 {
+    font-size: 35px;
+    margin-bottom: 0;
+}
+
+#modal-header p {
+    color: rgb(180, 180, 180);
+}
+  
+#modal-body {
+    color: rgb(30, 30, 30);
+    background-color: rgb(150, 150, 150);
+    padding: 20px 30px 30px 30px;
+}
+
+#modal-body p {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+#modal-body hr {
+    height: 1px;
+    border: none;
+    background-color: rgb(120, 120, 120);
+}
+
+#modal-body img {
+    width: 200px;
+    height: 300px;
+}
+
+#modal-body div {
+    margin-top: 25px;
+    display: flex;
+}
+
+#modal-body ul {
+    margin-top: 0;
+    margin-left: 10px;
+}
+
+#modal-body li {
+    list-style: circle;
+    margin-bottom: 7px;
+}
+
+#best-movie {
+    display: flex;
+    padding: 20px;
+    background-color: rgb(50, 50, 50);
+}
+
+#best-movie img {
+    width: 200px;
+    height: 300px;
+    margin-right: 20px;
+}
+
+#best-movie h3 {
+    font-size: 35px;
+    margin-top: 0;
+}
+
+#best-movie p {
+    margin-bottom: 25px;
+}
+
+#best-movie button {
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 17px;
+}
+
+.carousel {
+    background-color: rgb(50, 50, 50);
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.carousel > div {
+    overflow: hidden;
+    max-width: 90%;
+    margin: 0 50px;
+}
+
+.carousel__image-list {
+    transition: transform 0.3s;
+    width: 10000px;
+}
+
+.carousel img {
+    display: inline-block;
+    width: 200px;
+    height: 300px;
+}
+
+.carousel button {
+    margin: 110px 0;
+    padding-top: 5px;
+    padding-bottom: 3px;
+    border-radius: 7px;
+}

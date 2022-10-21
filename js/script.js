@@ -66,11 +66,11 @@ axios
         .get(`${titlesUrl}?genre=${genre["name"]}&imdb_score_min=8`)
         .then(function (response) {
             if (response.data["count"] > 7) { // A genre must be associated with at least 8 movies
-                genre_link = document.createElement("a");
+                genre_link = document.createElement("span");
                 genre_link.innerText = genre["name"];
                 dropdownContent.append(genre_link);
             }
-            genre_links = document.querySelectorAll(".dropdown__content a")
+            genre_links = document.querySelectorAll(".dropdown__content span")
             genre_links.forEach(genre_link => {
                 genre_link.addEventListener("click", function() {
                     genre = genre_link.innerText;

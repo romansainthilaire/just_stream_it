@@ -13,6 +13,10 @@ footer {
     background-color: rgb(30, 30, 30);
 }
 
+#logo {
+    width: 300px;
+}
+
 #github-logo {
     margin-top: 5px;
     height: 50px;
@@ -45,6 +49,7 @@ button:hover {
 }
 
 #best-movie, .carousel {
+    background-color: rgb(50, 50, 50);
     margin-bottom: 50px;
 }
 
@@ -58,13 +63,9 @@ button:hover {
 }
 
 #navbar {
-    padding: 50px 50px 20px 20px;
+    padding: 50px 50px 0 20px;
     background-color: rgb(30, 30, 30);
     display: flex;
-}
-
-#logo {
-    width: 300px;
 }
 
 #navbar > div {
@@ -92,25 +93,25 @@ button:hover {
 .dropdown__content {
     display: none;
     position: absolute;
-    background-color: rgb(80, 80, 80);
+    background-color: rgb(50, 50, 50);
     width: 165px;
     padding-bottom: 10px;
 }
 
-.dropdown__content div {
+.dropdown__content .offset {
     background-color: rgb(30, 30, 30);
     height: 10px;
 }
 
-.dropdown__content a {
-    color: rgb(180, 180, 180);
+.dropdown__content span {
+    color: rgb(150, 150, 150);
     font-size: 20px;
     padding: 10px 10px 5px 10px;
     text-decoration: none;
     display: block;
 }
 
-.dropdown__content a:hover {
+.dropdown__content span:hover {
     color: white;
     cursor: pointer;
 }
@@ -193,7 +194,6 @@ button:hover {
 #best-movie {
     display: flex;
     padding: 20px;
-    background-color: rgb(50, 50, 50);
 }
 
 #best-movie img {
@@ -216,7 +216,6 @@ button:hover {
 }
 
 .carousel {
-    background-color: rgb(50, 50, 50);
     padding: 20px;
     display: flex;
     justify-content: center;

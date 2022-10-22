@@ -63,7 +63,7 @@ axios
     let genres = response.data.results;
     genres.forEach(genre => {
         axios
-        .get(`${titlesUrl}?genre=${genre["name"]}&imdb_score_min=8`)
+        .get(`${titlesUrl}?genre=${genre["name"]}&imdb_score_min=7`)
         .then(function (response) {
             if (response.data["count"] > 7) { // A genre must be associated with at least 8 movies
                 genre_link = document.createElement("span");
@@ -102,24 +102,32 @@ function showMoviesByGenre(genre=null) {
     .get(genresUrl)
     .then(function(response) {
 
+        // Set genre title
+        genreTitle.innerText = genre == null ? "All genres" : genre;
+
         // Set URLs
-        let genreFilter = ""
-        if (genre == null) {
-            genreTitle.innerText = "All genres";
-        } else {
-            genreTitle.innerText = genre;
-            genreFilter = `&genre=${genre}`;
+        let bestMoviesUrlPage1 = `${titlesUrl}?sort_by=-imdb_score&page=1`;
+        let bestMoviesUrlPage2 = `${titlesUrl}?sort_by=-imdb_score&page=2`;
+        let popularMoviesUrlPage1 = `${titlesUrl}?sort_by=-votes&page=1`;
+        let popularMoviesUrlPage2 = `${titlesUrl}?sort_by=-votes&page=2`;
+        let frenchMoviesUrlPage1 = `${titlesUrl}?country=France&sort_by=-imdb_score&page=1`;
+        let frenchMoviesUrlPage2 = `${titlesUrl}?country=France&sort_by=-imdb_score&page=2`;
+        let recentMoviesUrlPage1 = `${titlesUrl}?imdb_score_min=7&sort_by=-year&page=1`;
+        let recentMoviesUrlPage2 = `${titlesUrl}?imdb_score_min=7&sort_by=-year&page=2`;
+        let oldMoviesUrlPage1 = `${titlesUrl}?imdb_score_min=8.2&sort_by=year&page=1`;
+        let oldMoviesUrlPage2 = `${titlesUrl}?imdb_score_min=8.2&sort_by=year&page=2`;
+        if (genre != null) {
+            bestMoviesUrlPage1 = `${titlesUrl}?genre=${genre}&sort_by=-imdb_score&page=1`;
+            bestMoviesUrlPage2 = `${titlesUrl}?genre=${genre}&sort_by=-imdb_score&page=2`;
+            popularMoviesUrlPage1 = `${titlesUrl}?genre=${genre}&sort_by=-votes&page=1`;
+            popularMoviesUrlPage2 = `${titlesUrl}?genre=${genre}&sort_by=-votes&page=2`;
+            frenchMoviesUrlPage1 = `${titlesUrl}?genre=${genre}&country=France&sort_by=-imdb_score&page=1`;
+            frenchMoviesUrlPage2 = `${titlesUrl}?genre=${genre}&country=France&sort_by=-imdb_score&page=2`;
+            recentMoviesUrlPage1 = `${titlesUrl}?genre=${genre}&imdb_score_min=7&sort_by=-year&page=1`;
+            recentMoviesUrlPage2 = `${titlesUrl}?genre=${genre}&imdb_score_min=7&sort_by=-year&page=2`;
+            oldMoviesUrlPage1 = `${titlesUrl}?genre=${genre}&imdb_score_min=8.2&sort_by=year&page=1`;
+            oldMoviesUrlPage2 = `${titlesUrl}?genre=${genre}&imdb_score_min=8.2&sort_by=year&page=2`;
         }
-        const bestMoviesUrlPage1 = `${titlesUrl}?sort_by=-imdb_score${genreFilter}&page=1`;
-        const bestMoviesUrlPage2 = `${titlesUrl}?sort_by=-imdb_score${genreFilter}&page=2`;
-        const popularMoviesUrlPage1 = `${titlesUrl}?sort_by=-votes${genreFilter}&page=1`;
-        const popularMoviesUrlPage2 = `${titlesUrl}?sort_by=-votes${genreFilter}&page=2`;
-        const unpopularMoviesUrlPage1 = `${titlesUrl}?sort_by=votes${genreFilter}&imdb_score_min=8&page=1`;
-        const unpopularMoviesUrlPage2 = `${titlesUrl}?sort_by=votes${genreFilter}&imdb_score_min=8&page=2`;
-        const recentMoviesUrlPage1 = `${titlesUrl}?sort_by=-year${genreFilter}&page=1`;
-        const recentMoviesUrlPage2 = `${titlesUrl}?sort_by=-year${genreFilter}&page=2`;
-        const oldMoviesUrlPage1 = `${titlesUrl}?sort_by=year${genreFilter}&imdb_score_min=8&page=1`;
-        const oldMoviesUrlPage2 = `${titlesUrl}?sort_by=year${genreFilter}&imdb_score_min=8&page=2`;
 
         // Set best movie
         axios
@@ -152,8 +160,8 @@ function showMoviesByGenre(genre=null) {
         setTop7Movies(popularMoviesUrlPage1, popularMoviesUrlPage2, top7PopularMovieImages)
 
         // Set top 7 little-known movies
-        const top7UnpopularMovieImages = document.querySelectorAll("#unpopular-movies img")
-        setTop7Movies(unpopularMoviesUrlPage1, unpopularMoviesUrlPage2, top7UnpopularMovieImages)
+        const top7FrenchMovieImages = document.querySelectorAll("#french-movies img")
+        setTop7Movies(frenchMoviesUrlPage1, frenchMoviesUrlPage2, top7FrenchMovieImages)
 
         // Set top 7 recent movies
         const top7RecentMovieImages = document.querySelectorAll("#recent-movies img")
@@ -238,7 +246,7 @@ function setCarousels(carousels) {
         const container = carousel.querySelector(".carousel > div")
         const containerWidth = container.offsetWidth
         const images = carousel.querySelectorAll('img');
-        const imageWidth = 200
+        const imageWidth = images[0].offsetWidth
         if (window.innerWidth > 1400) {
             visibleImageNb = 4
         } else if (window.innerWidth > 1150) {

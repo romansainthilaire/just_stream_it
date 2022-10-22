@@ -299,13 +299,18 @@ button:hover {
         text-decoration: none;
     }
 
+    .dropdown__content {
+        background-color: rgb(80, 80, 80);
+        width: 100px;
+    }
+
     .dropdown__content span {
         padding: 5px;
     }
 
     #genre {
         font-size: 20px;
-        margin: 50px 0 30px 0;
+        margin: 40px 0 30px 0;
         text-underline-offset: 10px;
     }
 
@@ -319,6 +324,7 @@ button:hover {
     }
 
     #navbar {
+        padding-top: 20px;
         display: block;
     }
 
@@ -344,13 +350,17 @@ button:hover {
     }
     
     #best-movie h3 {
-        font-size: 30px;
+        font-size: 25px;
         margin-top: 10px;
     }
     
     #best-movie p {
         text-align: justify;
         margin-bottom: 25px;
+    }
+
+    .carousel .movie-poster {
+        padding-top: 23px;
     }
 
     #modal-content {

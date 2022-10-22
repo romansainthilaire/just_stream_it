@@ -276,7 +276,7 @@ function setCarousels(carousels) {
             }
         })
         function moveimages() {
-          imageList.style.transform = `translateX(-${(imageWidth + 2 * imageMargin + 5) * imagesSteps}px)`;
+          imageList.style.transform = `translateX(-${(imageWidth + 2 * imageMargin + 4) * imagesSteps}px)`;
         }
     })
 }

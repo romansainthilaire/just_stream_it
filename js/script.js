@@ -214,8 +214,6 @@ function setMovies(moviesUrl, moviePosters) {
     for (let pageIndex = 1; pageIndex <= numberOfPages; pageIndex++) {
         moviesUrls.push(moviesUrl + `&page=${pageIndex}`)
     }
-    numberOfMoviesLeft = numberOfMovies
-
     axios
     .all([axios.get(moviesUrls[0]), axios.get(moviesUrls[1])])
     .then(axios.spread((...responses) => {
@@ -233,13 +231,15 @@ function setMovies(moviesUrl, moviePosters) {
                 .get(`${titlesUrl}${movieId}`)
                 .then(function(response) {
                     const movie = response.data;
-                    moviePoster = moviePosters[index];
-                    moviePoster.src = movie["image_url"];
-                    moviePoster.alt = movie["title"];
-                    moviePoster.addEventListener("click", function() {
-                        openModal()
-                        setModalInfo(movie)      
-                    })
+                    if (index < numberOfMovies) {
+                        moviePoster = moviePosters[index];
+                        moviePoster.src = movie["image_url"];
+                        moviePoster.alt = movie["title"];
+                        moviePoster.addEventListener("click", function() {
+                            openModal()
+                            setModalInfo(movie)      
+                        })
+                    }
                 })
             })
     }))

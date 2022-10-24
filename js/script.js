@@ -91,10 +91,6 @@ window.addEventListener('click', function(e) {
     }
 });
 
-
-
-
-
 // Create genres dropdown
 axios
 .get(genresUrl)
@@ -204,7 +200,6 @@ function setModalInfo(movie) {
     modalMovieBudget.innerText = `Budget : ${movie["budget"] == null ? "unknown" : movie["budget"] + " $"}`;
     modalMovieReleaseDate.innerText = `Release date : ${movie["date_published"]}`;
 }
-
 
 // Set movies
 function setMovies(moviesUrl, moviePosters) {

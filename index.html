@@ -11,12 +11,12 @@
 
 <body>
 
-    <div id="navbar">
+    <div class="navbar">
         <img id="juststreamit-logo" src="img/juststreamit-logo.png" alt="">
-        <div>
-            <a class="navbar-link" id="home" href="index.html">Home</a>
+        <div class="navbar__container">
+            <a class="navbar__link" id="home" href="index.html">Home</a>
             <div class="dropdown">
-                <a class="navbar-link">Genres</a>
+                <a class="navbar__link">Genres</a>
                 <div class="dropdown__content">
                     <div class="offset"></div>
                 </div>
@@ -26,20 +26,20 @@
 
     <h1 id="genre">Genre</h1>
 
-    <div id="best-movie">
+    <div class="best-movie">
         <img class="movie-poster" src="img/default-movie-poster.png" alt="Default movie poster">
         <div>
-            <h3>Movie title</h3>
-            <p></p>
-            <button>Details</button>
+            <h3 class="best-movie__title">Movie title</h3>
+            <p class="best-movie__description"></p>
+            <button class="best-movie__button">Details</button>
         </div>
     </div>
 
     <h2>Best Movies</h2>
     <div class="carousel" id="best-movies">
-        <button>&lt;</button>
+        <button class="carousel__button">&lt;</button>
         <div>
-            <div class="carousel__image-list">
+            <div class="carousel__movie-posters">
                 <img class="movie-poster" src="img/default-movie-poster.png" alt="Default movie poster">
                 <img class="movie-poster" src="img/default-movie-poster.png" alt="Default movie poster">
                 <img class="movie-poster" src="img/default-movie-poster.png" alt="Default movie poster">
@@ -49,14 +49,14 @@
                 <img class="movie-poster" src="img/default-movie-poster.png" alt="Default movie poster">
             </div>
         </div>
-        <button>&gt;</button>
+        <button class="carousel__button">&gt;</button>
     </div>
 
     <h2>Popular Movies</h2>
     <div class="carousel" id="popular-movies">
-        <button>&lt;</button>
+        <button class="carousel__button">&lt;</button>
         <div>
-            <div class="carousel__image-list">
+            <div class="carousel__movie-posters">
                 <img class="movie-poster" src="img/default-movie-poster.png" alt="Default movie poster">
                 <img class="movie-poster" src="img/default-movie-poster.png" alt="Default movie poster">
                 <img class="movie-poster" src="img/default-movie-poster.png" alt="Default movie poster">
@@ -66,14 +66,14 @@
                 <img class="movie-poster" src="img/default-movie-poster.png" alt="Default movie poster">
             </div>
         </div>
-        <button>&gt;</button>
+        <button class="carousel__button">&gt;</button>
     </div>
 
     <h2>Unpopular But Good Movies</h2>
     <div class="carousel" id="unpopular-but-good-movies">
-        <button>&lt;</button>
+        <button class="carousel__button">&lt;</button>
         <div>
-            <div class="carousel__image-list">
+            <div class="carousel__movie-posters">
                 <img class="movie-poster" src="img/default-movie-poster.png" alt="Default movie poster">
                 <img class="movie-poster" src="img/default-movie-poster.png" alt="Default movie poster">
                 <img class="movie-poster" src="img/default-movie-poster.png" alt="Default movie poster">
@@ -83,14 +83,14 @@
                 <img class="movie-poster" src="img/default-movie-poster.png" alt="Default movie poster">
             </div>
         </div>
-        <button>&gt;</button>
+        <button class="carousel__button">&gt;</button>
     </div>
 
     <h2>Best French Movies</h2>
     <div class="carousel" id="french-movies">
-        <button>&lt;</button>
+        <button class="carousel__button">&lt;</button>
         <div>
-            <div class="carousel__image-list">
+            <div class="carousel__movie-posters">
                 <img class="movie-poster" src="img/default-movie-poster.png" alt="Default movie poster">
                 <img class="movie-poster" src="img/default-movie-poster.png" alt="Default movie poster">
                 <img class="movie-poster" src="img/default-movie-poster.png" alt="Default movie poster">
@@ -100,14 +100,14 @@
                 <img class="movie-poster" src="img/default-movie-poster.png" alt="Default movie poster">
             </div>
         </div>
-        <button>&gt;</button>
+        <button class="carousel__button">&gt;</button>
     </div>
 
     <h2>Recent Movies</h2>
     <div class="carousel" id="recent-movies">
-        <button>&lt;</button>
+        <button class="carousel__button">&lt;</button>
         <div>
-            <div class="carousel__image-list">
+            <div class="carousel__movie-posters">
                 <img class="movie-poster" src="img/default-movie-poster.png" alt="Default movie poster">
                 <img class="movie-poster" src="img/default-movie-poster.png" alt="Default movie poster">
                 <img class="movie-poster" src="img/default-movie-poster.png" alt="Default movie poster">
@@ -117,14 +117,14 @@
                 <img class="movie-poster" src="img/default-movie-poster.png" alt="Default movie poster">
             </div>
         </div>
-        <button>&gt;</button>
+        <button class="carousel__button">&gt;</button>
     </div>
 
     <h2>Old But Gold Movies</h2>
     <div class="carousel" id="old-movies">
-        <button>&lt;</button>
+        <button class="carousel__button">&lt;</button>
         <div>
-            <div class="carousel__image-list">
+            <div class="carousel__movie-posters">
                 <img class="movie-poster" src="img/default-movie-poster.png" alt="Default movie poster">
                 <img class="movie-poster" src="img/default-movie-poster.png" alt="Default movie poster">
                 <img class="movie-poster" src="img/default-movie-poster.png" alt="Default movie poster">
@@ -134,31 +134,31 @@
                 <img class="movie-poster" src="img/default-movie-poster.png" alt="Default movie poster">
             </div>
         </div>
-        <button>&gt;</button>
+        <button class="carousel__button">&gt;</button>
     </div>
 
-    <div id="modal">
-        <div id="modal-content">
-            <div id="modal-header">
-                <span><img src="img/close-icon.svg" alt=""></span>
-                <h3>Movie title</h3>
-                <p><span></span> - <span></span> min</p>
+    <div class="modal">
+        <div class="modal__content">
+            <div class="modal__header">
+                <span><img class="modal__close-button" src="img/close-icon.svg" alt=""></span>
+                <h3 class="modal__movie-title">Movie title</h3>
+                <p class="modal__sub-title"><span class="modal__movie-year"></span> - <span class="modal__movie-duration"></span> min</p>
             </div>
-            <div id="modal-body">
-                <p></p>
+            <div class="modal__body">
+                <p class="modal__movie-long-description"></p>
                 <hr>
-                <div>
+                <div class="modal__movie-details-container">
                     <img class="movie-poster" src="img/default-movie-poster.png" alt="Default movie poster">
-                    <ul>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
+                    <ul class="modal__movie-details-list">
+                        <li class="modal__movie-genres"></li>
+                        <li class="modal__movie-rated"></li>
+                        <li class="modal__movie-imdb-score"></li>
+                        <li class="modal__movie-votes"></li>
+                        <li class="modal__movie-directors"></li>
+                        <li class="modal__movie-actors"></li>
+                        <li class="modal__movie-countries"></li>
+                        <li class="modal__movie-budget"></li>
+                        <li class="modal__movie-release-date"></li>
                     </ul>
                 </div>
             </div>

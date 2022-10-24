@@ -1,34 +1,34 @@
 // Navbar
 const justStreamItLogo = document.querySelector("#juststreamit-logo");
-const home = document.querySelectorAll(".navbar-link")[0];
+const home = document.querySelector("#home");
 const dropdownContent = document.querySelector(".dropdown__content");
 
 // Genre
 const genreTitle = document.querySelector("#genre")
 
 // Best movie
-const bestMovieTitle = document.querySelector("#best-movie h3");
-const bestMovieImage = document.querySelector("#best-movie img");
-const bestMovieDescription = document.querySelector("#best-movie p");
-const bestMovieButton = document.querySelector("#best-movie button");
+const bestMovieTitle = document.querySelector(".best-movie__title");
+const bestMoviePoster = document.querySelector(".best-movie .movie-poster");
+const bestMovieDescription = document.querySelector(".best-movie__description");
+const bestMovieButton = document.querySelector(".best-movie__button");
 
 // Modal
-const modal = document.querySelector("#modal")
-const modalCloseButton = document.querySelector("#modal-header img")
-const modalMovieTitle = document.querySelector("#modal-header h3")
-const modalMovieYear = document.querySelectorAll("#modal-header p span")[0]
-const modalMovieDuration = document.querySelectorAll("#modal-header p span")[1]
-const modalMovieLongDescription = document.querySelector("#modal-body p")
-const modalMoviePoster = document.querySelector("#modal-body img")
-const modalMovieGenre = document.querySelectorAll("#modal-body li")[0]
-const modalMovieRated = document.querySelectorAll("#modal-body li")[1]
-const modalMovieImdbScore = document.querySelectorAll("#modal-body li")[2]
-const modalMovieVotes = document.querySelectorAll("#modal-body li")[3]
-const modalMovieDirectors = document.querySelectorAll("#modal-body li")[4]
-const modalMovieActors = document.querySelectorAll("#modal-body li")[5]
-const modalMovieCountries = document.querySelectorAll("#modal-body li")[6]
-const modalMovieBudget = document.querySelectorAll("#modal-body li")[7]
-const modalMovieReleaseDate = document.querySelectorAll("#modal-body li")[8]
+const modal = document.querySelector(".modal")
+const modalCloseButton = document.querySelector(".modal__close-button")
+const modalMovieTitle = document.querySelector(".modal__movie-title")
+const modalMovieYear = document.querySelector(".modal__movie-year")
+const modalMovieDuration = document.querySelector(".modal__movie-duration")
+const modalMovieLongDescription = document.querySelector(".modal__movie-long-description")
+const modalMoviePoster = document.querySelector(".modal .movie-poster")
+const modalMovieGenres = document.querySelector(".modal__movie-genres")
+const modalMovieRated = document.querySelector(".modal__movie-rated")
+const modalMovieImdbScore = document.querySelector(".modal__movie-imdb-score")
+const modalMovieVotes = document.querySelector(".modal__movie-votes")
+const modalMovieDirectors = document.querySelector(".modal__movie-directors")
+const modalMovieActors = document.querySelector(".modal__movie-actors")
+const modalMovieCountries = document.querySelector(".modal__movie-countries")
+const modalMovieBudget = document.querySelector(".modal__movie-budget")
+const modalMovieReleaseDate = document.querySelector(".modal__movie-release-date")
 
 
 const moviePosters = document.querySelectorAll(".movie-poster")
@@ -152,10 +152,10 @@ function showMoviesByGenre(genre=null) {
             .then(function(response) {
                 const bestMovie = response.data;
                 bestMovieTitle.innerText = bestMovie["title"];
-                bestMovieImage.src = bestMovie["image_url"];
-                bestMovieImage.alt = bestMovie["title"];
+                bestMoviePoster.src = bestMovie["image_url"];
+                bestMoviePoster.alt = bestMovie["title"];
                 bestMovieDescription.innerText = bestMovie["description"];
-                bestMovieModalTriggers = [bestMovieImage, bestMovieButton]
+                bestMovieModalTriggers = [bestMoviePoster, bestMovieButton]
                 bestMovieModalTriggers.forEach(trigger => {
                     trigger.addEventListener("click", function() {
                         openModal()
@@ -200,7 +200,7 @@ function setModalInfo(movie) {
     modalMovieLongDescription.innerText = movie["long_description"];
     modalMoviePoster.src = movie["image_url"];
     modalMoviePoster.alt = movie["title"];
-    modalMovieGenre.innerText = `Genre${movie["genres"].length > 1 ? 's' : ''} : ` +
+    modalMovieGenres.innerText = `Genre${movie["genres"].length > 1 ? 's' : ''} : ` +
     movie["genres"].toString().replaceAll(",", ", ").toLowerCase();
     modalMovieRated.innerText = `Rated : ${movie["rated"]}`;
     modalMovieImdbScore.innerText = `IMDB Score : ${movie["imdb_score"]}`;
@@ -255,7 +255,7 @@ window.addEventListener("resize", function() {
 
 function setCarousels(carousels) {
     carousels.forEach(carousel => {
-        const imageList = carousel.querySelector('.carousel__image-list');
+        const imageList = carousel.querySelector('.carousel__movie-posters');
         imageList.style.transform = "translateX(0px)"
         const container = carousel.querySelector(".carousel > div")
         const containerWidth = container.offsetWidth
@@ -275,8 +275,8 @@ function setCarousels(carousels) {
             image.style.margin = `0 ${imageMargin}px`
         })
         let imagesSteps = 0;
-        const prevButton = carousel.querySelectorAll('button')[0];
-        const nextButton = carousel.querySelectorAll('button')[1];
+        const prevButton = carousel.querySelectorAll(".carousel__button")[0];
+        const nextButton = carousel.querySelectorAll(".carousel__button")[1];
         nextButton.addEventListener("click", function() {
             if (imagesSteps < images.length - visibleImageNb) {
                 imagesSteps++;

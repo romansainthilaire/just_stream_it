@@ -39,7 +39,7 @@ button:hover {
     height: 60px;
 }
 
-#best-movie, .carousel {
+.best-movie, .carousel {
     background-color: rgb(50, 50, 50);
     margin-bottom: 50px;
     padding: 20px;
@@ -55,19 +55,19 @@ button:hover {
     text-underline-offset: 15px;
 }
 
-#navbar {
+.navbar {
     padding: 50px 50px 0 20px;
     background-color: rgb(30, 30, 30);
     display: flex;
 }
 
-#navbar > div {
+.navbar__container {
     margin-left: auto;
     align-self: center;
     display: flex;
 }
 
-.navbar-link {
+.navbar__link {
     color: white;
     text-decoration: none;
     font-size: 23px;
@@ -109,7 +109,7 @@ button:hover {
     cursor: pointer;
 }
 
-#modal {
+.modal {
     display: none;
     position: fixed;
     left: 0;
@@ -120,84 +120,84 @@ button:hover {
     overflow: auto;
 }
 
-#modal-content {
+.modal__content {
     margin: 2% auto;
     width: 60%;
     min-width: 400px;
     max-width: 800px;
 }
 
-#modal-header {
+.modal__header {
     background: rgb(80, 80, 80);
     padding: 10px 10px 10px 20px;
 }
 
-#modal-header img {
+.modal__close-button {
     filter: invert(49%) sepia(0%) saturate(0%) hue-rotate(319deg) brightness(96%) contrast(96%);
     float: right;
 }
   
-#modal-header img:hover {
+.modal__close-button:hover {
     filter: invert(97%) sepia(100%) saturate(13%) hue-rotate(191deg) brightness(102%) contrast(106%);
     text-decoration: none;
     cursor:  pointer;
 }
 
-#modal-header h3 {
+.modal__movie-title {
     font-size: 35px;
     margin-bottom: 0;
 }
 
-#modal-header p {
+.modal__sub-title {
     color: rgb(200, 200, 200);
 }
   
-#modal-body {
+.modal__body {
     color: rgb(30, 30, 30);
     background-color: rgb(200, 200, 200);
     padding: 20px 30px 30px 30px;
 }
 
-#modal-body p {
+.modal__movie-long-description {
     margin-top: 0;
     margin-bottom: 20px;
 }
 
-#modal-body hr {
+.modal__body hr {
     height: 1px;
     border: none;
     background-color: rgb(150, 150, 150);
 }
 
-#modal-body div {
+.modal__movie-details-container {
     margin-top: 25px;
     display: flex;
 }
 
-#modal-body ul {
+.modal__movie-details-list {
     margin-top: 0;
     margin-left: 10px;
 }
 
-#modal-body li {
+.modal__movie-details-list li {
     list-style: circle;
     margin-bottom: 7px;
 }
 
-#best-movie .movie-poster {
+.best-movie .movie-poster {
     margin-right: 20px;
 }
 
-#best-movie h3 {
+.best-movie__title {
     font-size: 35px;
     margin-top: 0;
 }
 
-#best-movie p {
+.best-movie__description {
     margin-bottom: 25px;
 }
 
-#best-movie button {
+.best-movie__button {
     padding: 10px;
     border-radius: 5px;
     font-size: 17px;
@@ -213,12 +213,12 @@ button:hover {
     margin: 0 50px;
 }
 
-.carousel__image-list {
+.carousel__movie-posters {
     transition: transform 0.3s;
     width: 10000px;
 }
 
-.carousel button {
+.carousel__button {
     font-size: 20px;
     margin: 120px 0;
     padding: 5px 8px 3px 8px;
@@ -240,18 +240,18 @@ footer {
         margin: 0 50px;
     }
 
-    #modal-body div {
+    .modal__movie-details-container {
         display: block;
         text-align: center;
     }
 
-    #modal-body ul {
+    .modal__movie-details-list {
         padding: 0;
         margin-left: 0;
         margin-top: 20px;
     }
     
-    #modal-body li {
+    .modal__movie-details-list li {
         list-style: none;
         margin-bottom: 12px;
     }
@@ -264,11 +264,11 @@ footer {
         width: 250px;
     }
 
-    #navbar > div {
+    .navbar__container {
         margin-top: 20px;
     }
 
-    .navbar-link {
+    .navbar__link {
         font-size: 20px;
         margin-right: 20px;
         padding-bottom: 20px;
@@ -314,7 +314,7 @@ footer {
         text-underline-offset: 10px;
     }
 
-    #best-movie, .carousel {
+    .best-movie, .carousel {
         padding: 10px;
     }
 
@@ -323,38 +323,38 @@ footer {
         height: 225px
     }
 
-    #navbar {
+    .navbar {
         padding-top: 20px;
         display: block;
     }
 
-    #navbar > div {
+    .navbar__container {
         margin-top: 20px;
         display: block;
     }
 
-    .navbar-link {
+    .navbar__link {
         font-size: 20px;
         margin-right: 20px;
         padding-bottom: 20px;
     }
 
-    #best-movie {
+    .best-movie {
         padding: 20px 10px;
         text-align: center;
         display: block;
     }
 
-    #best-movie .movie-poster {
+    .best-movie .movie-poster {
         margin-right: 0;
     }
     
-    #best-movie h3 {
+    .best-movie__title {
         font-size: 25px;
         margin-top: 10px;
     }
     
-    #best-movie p {
+    .best-movie__description {
         text-align: justify;
         margin-bottom: 25px;
     }
@@ -363,14 +363,14 @@ footer {
         padding-top: 23px;
     }
 
-    #modal-content {
+    .modal__content {
         margin: auto;
         width: 100%;
         min-width: 0;
         max-width: 800px;
     }
 
-    #modal-body {
+    .modal__body {
         padding: 10px;
     }
 

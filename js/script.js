@@ -219,9 +219,13 @@ function setMovies(moviesUrl, moviePosters) {
     axios
     .all([axios.get(moviesUrls[0]), axios.get(moviesUrls[1])])
     .then(axios.spread((...responses) => {
-            movies = responses[0].data.results.slice(0, Math.min(numberOfMoviesLeft, numberOfMoviesPerPage))
+            moviesPage1 = responses[0].data.results.slice(0, numberOfMoviesPerPage)
+            moviesPage2 = responses[1].data.results.slice(0, numberOfMoviesPerPage)
             let movieIds = []
-            movies.forEach(movie => {
+            moviesPage1.forEach(movie => {
+                movieIds.push(movie["id"])
+            })
+            moviesPage2.forEach(movie => {
                 movieIds.push(movie["id"])
             })
             movieIds.forEach(function (movieId, index) {

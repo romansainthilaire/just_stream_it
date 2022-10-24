@@ -4,31 +4,13 @@ body {
     color: white;
 }
 
-footer {
-    border-top: 1px solid rgb(80, 80, 80);
-    margin-top: 70px;
-    padding-top: 20px;
-    text-align: center;
-    height: 140px;
-    background-color: rgb(30, 30, 30);
-}
-
-#logo {
-    width: 300px;
-}
-
-#github-logo {
-    margin-top: 5px;
-    height: 50px;
-}
-
-#github-logo:hover {
-    margin-top: 0;
-    height: 60px;
-}
-
 img {
     cursor: pointer;
+}
+
+.movie-poster {
+    width: 200px;
+    height: 300px
 }
 
 button {
@@ -43,9 +25,18 @@ button:hover {
     background-color: rgb(20, 20, 20);
 }
 
-.movie-poster {
-    width: 200px;
-    height: 300px
+#logo {
+    width: 300px;
+}
+
+#github-logo {
+    margin-top: 5px;
+    height: 50px;
+}
+
+#github-logo:hover {
+    margin-top: 0;
+    height: 60px;
 }
 
 #best-movie, .carousel {
@@ -193,7 +184,7 @@ button:hover {
     margin-bottom: 7px;
 }
 
-#best-movie img {
+#best-movie .movie-poster {
     margin-right: 20px;
 }
 
@@ -232,6 +223,15 @@ button:hover {
     margin: 120px 0;
     padding: 5px 8px 3px 8px;
     border-radius: 7px;
+}
+
+footer {
+    border-top: 1px solid rgb(80, 80, 80);
+    margin-top: 70px;
+    padding-top: 20px;
+    text-align: center;
+    height: 140px;
+    background-color: rgb(30, 30, 30);
 }
 
 @media screen and (max-width: 1000px) {
@@ -345,7 +345,7 @@ button:hover {
         display: block;
     }
 
-    #best-movie img {
+    #best-movie .movie-poster {
         margin-right: 0;
     }
     

@@ -30,6 +30,15 @@ const modalMovieCountries = document.querySelectorAll("#modal-body li")[6]
 const modalMovieBudget = document.querySelectorAll("#modal-body li")[7]
 const modalMovieReleaseDate = document.querySelectorAll("#modal-body li")[8]
 
+
+const moviePosters = document.querySelectorAll(".movie-poster")
+moviePosters.forEach(moviePoster => {
+    moviePoster.addEventListener("error", function() {
+        moviePoster.src = "img/default-movie-poster.png";
+        moviePoster.alt = "Default movie poster";
+    });
+})
+
 // Open modal
 function openModal() {
     modal.style.display = 'block';
@@ -112,10 +121,10 @@ function showMoviesByGenre(genre=null) {
         let popularMoviesUrlPage2 = `${titlesUrl}?sort_by=-votes&page=2`;
         let frenchMoviesUrlPage1 = `${titlesUrl}?country=France&sort_by=-imdb_score&page=1`;
         let frenchMoviesUrlPage2 = `${titlesUrl}?country=France&sort_by=-imdb_score&page=2`;
-        let recentMoviesUrlPage1 = `${titlesUrl}?imdb_score_min=7&sort_by=-year&page=1`;
-        let recentMoviesUrlPage2 = `${titlesUrl}?imdb_score_min=7&sort_by=-year&page=2`;
-        let oldMoviesUrlPage1 = `${titlesUrl}?imdb_score_min=8.2&sort_by=year&page=1`;
-        let oldMoviesUrlPage2 = `${titlesUrl}?imdb_score_min=8.2&sort_by=year&page=2`;
+        let recentMoviesUrlPage1 = `${titlesUrl}?sort_by=-year&page=1`;
+        let recentMoviesUrlPage2 = `${titlesUrl}?sort_by=-year&page=2`;
+        let oldMoviesUrlPage1 = `${titlesUrl}?imdb_score_min=8&sort_by=year&page=1`;
+        let oldMoviesUrlPage2 = `${titlesUrl}?imdb_score_min=8&sort_by=year&page=2`;
         if (genre != null) {
             bestMoviesUrlPage1 = `${titlesUrl}?genre=${genre}&sort_by=-imdb_score&page=1`;
             bestMoviesUrlPage2 = `${titlesUrl}?genre=${genre}&sort_by=-imdb_score&page=2`;
@@ -123,10 +132,10 @@ function showMoviesByGenre(genre=null) {
             popularMoviesUrlPage2 = `${titlesUrl}?genre=${genre}&sort_by=-votes&page=2`;
             frenchMoviesUrlPage1 = `${titlesUrl}?genre=${genre}&country=France&sort_by=-imdb_score&page=1`;
             frenchMoviesUrlPage2 = `${titlesUrl}?genre=${genre}&country=France&sort_by=-imdb_score&page=2`;
-            recentMoviesUrlPage1 = `${titlesUrl}?genre=${genre}&imdb_score_min=7&sort_by=-year&page=1`;
-            recentMoviesUrlPage2 = `${titlesUrl}?genre=${genre}&imdb_score_min=7&sort_by=-year&page=2`;
-            oldMoviesUrlPage1 = `${titlesUrl}?genre=${genre}&imdb_score_min=8.2&sort_by=year&page=1`;
-            oldMoviesUrlPage2 = `${titlesUrl}?genre=${genre}&imdb_score_min=8.2&sort_by=year&page=2`;
+            recentMoviesUrlPage1 = `${titlesUrl}?genre=${genre}&sort_by=-year&page=1`;
+            recentMoviesUrlPage2 = `${titlesUrl}?genre=${genre}&sort_by=-year&page=2`;
+            oldMoviesUrlPage1 = `${titlesUrl}?genre=${genre}&imdb_score_min=8&sort_by=year&page=1`;
+            oldMoviesUrlPage2 = `${titlesUrl}?genre=${genre}&imdb_score_min=8&sort_by=year&page=2`;
         }
 
         // Set best movie
@@ -140,6 +149,7 @@ function showMoviesByGenre(genre=null) {
                 const bestMovie = response.data;
                 bestMovieTitle.innerText = bestMovie["title"];
                 bestMovieImage.src = bestMovie["image_url"];
+                bestMovieImage.alt = bestMovie["title"];
                 bestMovieDescription.innerText = bestMovie["description"];
                 bestMovieModalTriggers = [bestMovieImage, bestMovieButton]
                 bestMovieModalTriggers.forEach(trigger => {
@@ -152,23 +162,23 @@ function showMoviesByGenre(genre=null) {
         })
 
         // Set top 7 best movies
-        const top7BestMovieImages = document.querySelectorAll("#best-movies img")
+        const top7BestMovieImages = document.querySelectorAll("#best-movies .movie-poster")
         setTop7Movies(bestMoviesUrlPage1, bestMoviesUrlPage2, top7BestMovieImages)
 
         // Set top 7 popular movies
-        const top7PopularMovieImages = document.querySelectorAll("#popular-movies img")
+        const top7PopularMovieImages = document.querySelectorAll("#popular-movies .movie-poster")
         setTop7Movies(popularMoviesUrlPage1, popularMoviesUrlPage2, top7PopularMovieImages)
 
-        // Set top 7 little-known movies
-        const top7FrenchMovieImages = document.querySelectorAll("#french-movies img")
+        // Set top 7 french movies
+        const top7FrenchMovieImages = document.querySelectorAll("#french-movies .movie-poster")
         setTop7Movies(frenchMoviesUrlPage1, frenchMoviesUrlPage2, top7FrenchMovieImages)
 
         // Set top 7 recent movies
-        const top7RecentMovieImages = document.querySelectorAll("#recent-movies img")
+        const top7RecentMovieImages = document.querySelectorAll("#recent-movies .movie-poster")
         setTop7Movies(recentMoviesUrlPage1, recentMoviesUrlPage2, top7RecentMovieImages)
 
         // Set top 7 old but gold movies
-        const top7OldMovieImages = document.querySelectorAll("#old-movies img")
+        const top7OldMovieImages = document.querySelectorAll("#old-movies .movie-poster")
         setTop7Movies(oldMoviesUrlPage1, oldMoviesUrlPage2, top7OldMovieImages)
 
     })
@@ -181,9 +191,7 @@ function setModalInfo(movie) {
     modalMovieDuration.innerText = movie["duration"];
     modalMovieLongDescription.innerText = movie["long_description"];
     modalMoviePoster.src = movie["image_url"];
-    modalMoviePoster.addEventListener("error", function() {
-        modalMoviePoster.src = "img/default-movie-poster.png";
-    })
+    modalMoviePoster.alt = movie["title"];
     modalMovieGenre.innerText = `Genre${movie["genres"].length > 1 ? 's' : ''} : ` +
     movie["genres"].toString().replaceAll(",", ", ").toLowerCase();
     modalMovieRated.innerText = `Rated : ${movie["rated"]}`;
@@ -220,9 +228,7 @@ function setTop7Movies(moviesUrlPage1, moviesUrlPage2, top7MovieImages) {
                 const movie = response.data;
                 movieImage = top7MovieImages[index];
                 movieImage.src = movie["image_url"];
-                movieImage.addEventListener("error", function() {
-                    movieImage.src = "img/default-movie-poster.png";
-                })
+                movieImage.alt = movie["title"];
                 movieImage.addEventListener("click", function() {
                     openModal()
                     setModalInfo(movie)      

@@ -132,11 +132,7 @@ showMoviesByGenre(genre);
 
 // Show movies by genre
 function showMoviesByGenre(genre=null) {
-
-    // Set genre title
     genreTitle.innerText = genre == null ? "All genres" : genre;
-
-    // Set URLs
     const titlesByGenreUrl = genre == null ? `${titlesUrl}?` : `${titlesUrl}?genre=${genre}&`
     const bestMoviesUrl = `${titlesByGenreUrl}sort_by=-imdb_score`;
     const popularMoviesUrl = `${titlesByGenreUrl}sort_by=-votes`;
@@ -144,32 +140,7 @@ function showMoviesByGenre(genre=null) {
     const bestFrenchMoviesUrl = `${titlesByGenreUrl}country=France&lang=French&sort_by=-imdb_score`;
     const recentMoviesUrl = `${titlesByGenreUrl}sort_by=-year`;
     const oldButGoldMoviesUrl = `${titlesByGenreUrl}imdb_score_min=8&sort_by=year`;
-
-    // Set best movie
-    axios
-    .get(bestMoviesUrl)
-    .then(function(response) {
-        const bestMovieId = response.data.results[0]["id"];
-        axios
-        .get(`${titlesUrl}${bestMovieId}`)
-        .then(function(response) {
-            const bestMovie = response.data;
-            bestMovieTitle.innerText = bestMovie["title"];
-            bestMoviePoster.src = bestMovie["image_url"];
-            bestMoviePoster.alt = bestMovie["title"];
-            bestMovieDescription.innerText = bestMovie["description"];
-            bestMovieModalTriggers = [bestMoviePoster, bestMovieButton]
-            bestMovieModalTriggers.forEach(trigger => {
-                trigger.addEventListener("click", function() {
-                    openModal()
-                    setModalInfo(bestMovie)      
-                })
-            })
-        })
-    })
-
-
-    
+    setBestMovie(bestMoviesUrl)
     setMovies(bestMoviesUrl, bestMoviesPosters)
     setMovies(popularMoviesUrl, popularMoviesPosters)
     setMovies(unpopularButGoodMoviesUrl, unpopularButGoodMoviesPosters)
@@ -199,6 +170,31 @@ function setModalInfo(movie) {
     movie["countries"].toString().replaceAll(",", ", ");
     modalMovieBudget.innerText = `Budget : ${movie["budget"] == null ? "unknown" : movie["budget"] + " $"}`;
     modalMovieReleaseDate.innerText = `Release date : ${movie["date_published"]}`;
+}
+
+// Set best movie
+function setBestMovie(bestMoviesUrl) {
+    axios
+    .get(bestMoviesUrl)
+    .then(function(response) {
+        const bestMovieId = response.data.results[0]["id"];
+        axios
+        .get(`${titlesUrl}${bestMovieId}`)
+        .then(function(response) {
+            const bestMovie = response.data;
+            bestMovieTitle.innerText = bestMovie["title"];
+            bestMoviePoster.src = bestMovie["image_url"];
+            bestMoviePoster.alt = bestMovie["title"];
+            bestMovieDescription.innerText = bestMovie["description"];
+            bestMovieModalTriggers = [bestMoviePoster, bestMovieButton]
+            bestMovieModalTriggers.forEach(trigger => {
+                trigger.addEventListener("click", function() {
+                    openModal()
+                    setModalInfo(bestMovie)      
+                })
+            })
+        })
+    })
 }
 
 // Set movies

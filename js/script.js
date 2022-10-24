@@ -119,8 +119,10 @@ function showMoviesByGenre(genre=null) {
         let bestMoviesUrlPage2 = `${titlesUrl}?sort_by=-imdb_score&page=2`;
         let popularMoviesUrlPage1 = `${titlesUrl}?sort_by=-votes&page=1`;
         let popularMoviesUrlPage2 = `${titlesUrl}?sort_by=-votes&page=2`;
-        let frenchMoviesUrlPage1 = `${titlesUrl}?country=France&sort_by=-imdb_score&page=1`;
-        let frenchMoviesUrlPage2 = `${titlesUrl}?country=France&sort_by=-imdb_score&page=2`;
+        let unpopularButGoodMoviesUrlPage1 = `${titlesUrl}?imdb_score_min=8&sort_by=votes&page=1`;
+        let unpopularButGoodMoviesUrlPage2 = `${titlesUrl}?imdb_score_min=8&sort_by=votes&page=2`;
+        let frenchMoviesUrlPage1 = `${titlesUrl}?country=France&lang=French&sort_by=-imdb_score&page=1`;
+        let frenchMoviesUrlPage2 = `${titlesUrl}?country=France&lang=French&sort_by=-imdb_score&page=2`;
         let recentMoviesUrlPage1 = `${titlesUrl}?sort_by=-year&page=1`;
         let recentMoviesUrlPage2 = `${titlesUrl}?sort_by=-year&page=2`;
         let oldMoviesUrlPage1 = `${titlesUrl}?imdb_score_min=8&sort_by=year&page=1`;
@@ -130,8 +132,10 @@ function showMoviesByGenre(genre=null) {
             bestMoviesUrlPage2 = `${titlesUrl}?genre=${genre}&sort_by=-imdb_score&page=2`;
             popularMoviesUrlPage1 = `${titlesUrl}?genre=${genre}&sort_by=-votes&page=1`;
             popularMoviesUrlPage2 = `${titlesUrl}?genre=${genre}&sort_by=-votes&page=2`;
-            frenchMoviesUrlPage1 = `${titlesUrl}?genre=${genre}&country=France&sort_by=-imdb_score&page=1`;
-            frenchMoviesUrlPage2 = `${titlesUrl}?genre=${genre}&country=France&sort_by=-imdb_score&page=2`;
+            unpopularButGoodMoviesUrlPage1 = `${titlesUrl}?genre=${genre}&imdb_score_min=8&sort_by=votes&page=1`;
+            unpopularButGoodMoviesUrlPage2 = `${titlesUrl}?genre=${genre}&imdb_score_min=8&sort_by=votes&page=2`;
+            frenchMoviesUrlPage1 = `${titlesUrl}?genre=${genre}&country=France&lang=French&sort_by=-imdb_score&page=1`;
+            frenchMoviesUrlPage2 = `${titlesUrl}?genre=${genre}&country=France&lang=French&sort_by=-imdb_score&page=2`;
             recentMoviesUrlPage1 = `${titlesUrl}?genre=${genre}&sort_by=-year&page=1`;
             recentMoviesUrlPage2 = `${titlesUrl}?genre=${genre}&sort_by=-year&page=2`;
             oldMoviesUrlPage1 = `${titlesUrl}?genre=${genre}&imdb_score_min=8&sort_by=year&page=1`;
@@ -169,9 +173,13 @@ function showMoviesByGenre(genre=null) {
         const top7PopularMovieImages = document.querySelectorAll("#popular-movies .movie-poster")
         setTop7Movies(popularMoviesUrlPage1, popularMoviesUrlPage2, top7PopularMovieImages)
 
-        // Set top 7 french movies
-        const top7FrenchMovieImages = document.querySelectorAll("#french-movies .movie-poster")
-        setTop7Movies(frenchMoviesUrlPage1, frenchMoviesUrlPage2, top7FrenchMovieImages)
+        // Set top 7 unpopular but good movies
+        const top7UnpopularButGoodMovieImages = document.querySelectorAll("#unpopular-but-good-movies .movie-poster")
+        setTop7Movies(unpopularButGoodMoviesUrlPage1, unpopularButGoodMoviesUrlPage2, top7UnpopularButGoodMovieImages)
+
+        // Set top 7 best french movies
+        const top7BestFrenchMovieImages = document.querySelectorAll("#french-movies .movie-poster")
+        setTop7Movies(frenchMoviesUrlPage1, frenchMoviesUrlPage2, top7BestFrenchMovieImages)
 
         // Set top 7 recent movies
         const top7RecentMovieImages = document.querySelectorAll("#recent-movies .movie-poster")

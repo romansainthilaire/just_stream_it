@@ -6,9 +6,18 @@ const dropdownContent = document.querySelector(".dropdown__content");
 // Genre
 const genreTitle = document.querySelector("#genre")
 
+// Movie posters
+const allMoviePosters = document.querySelectorAll(".movie-poster")
+const bestMoviePoster = document.querySelector(".best-movie .movie-poster");
+const bestMoviesPosters = document.querySelectorAll(".best-movies .movie-poster")
+const popularMoviesPosters = document.querySelectorAll(".popular-movies .movie-poster")
+const unpopularButGoodMoviesPosters = document.querySelectorAll(".unpopular-but-good-movies .movie-poster")
+const bestFrenchMoviesPosters = document.querySelectorAll(".best-french-movies .movie-poster")
+const recentMoviesPosters = document.querySelectorAll(".recent-movies .movie-poster")
+const oldButGoldMoviesPosters = document.querySelectorAll(".old-but-gold-movies .movie-poster")
+
 // Best movie
 const bestMovieTitle = document.querySelector(".best-movie__title");
-const bestMoviePoster = document.querySelector(".best-movie .movie-poster");
 const bestMovieDescription = document.querySelector(".best-movie__description");
 const bestMovieButton = document.querySelector(".best-movie__button");
 
@@ -30,9 +39,32 @@ const modalMovieCountries = document.querySelector(".modal__movie-countries")
 const modalMovieBudget = document.querySelector(".modal__movie-budget")
 const modalMovieReleaseDate = document.querySelector(".modal__movie-release-date")
 
+// URLs
+const baseUrl = "http://127.0.0.1:8000/api/v1";
+const genresUrl = `${baseUrl}/genres/`;
+const titlesUrl = `${baseUrl}/titles/`;
+const numberOfMoviesPerPage = 5
 
-const moviePosters = document.querySelectorAll(".movie-poster")
-moviePosters.forEach(moviePoster => {
+
+
+
+
+genre = null;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+allMoviePosters.forEach(moviePoster => {
     moviePoster.addEventListener("error", function() {
         moviePoster.src = "img/default-movie-poster.png";
         moviePoster.alt = "Default movie poster";
@@ -59,11 +91,9 @@ window.addEventListener('click', function(e) {
     }
 });
 
-const baseUrl = "http://127.0.0.1:8000/api/v1";
-const genresUrl = `${baseUrl}/genres/`;
-const titlesUrl = `${baseUrl}/titles/`;
 
-genre = null;
+
+
 
 // Create genres dropdown
 axios
@@ -107,89 +137,49 @@ showMoviesByGenre(genre);
 // Show movies by genre
 function showMoviesByGenre(genre=null) {
 
+    // Set genre title
+    genreTitle.innerText = genre == null ? "All genres" : genre;
+
+    // Set URLs
+    const titlesByGenreUrl = genre == null ? `${titlesUrl}?` : `${titlesUrl}?genre=${genre}&`
+    const bestMoviesUrl = `${titlesByGenreUrl}sort_by=-imdb_score`;
+    const popularMoviesUrl = `${titlesByGenreUrl}sort_by=-votes`;
+    const unpopularButGoodMoviesUrl = `${titlesByGenreUrl}imdb_score_min=8&sort_by=votes`;
+    const bestFrenchMoviesUrl = `${titlesByGenreUrl}country=France&lang=French&sort_by=-imdb_score`;
+    const recentMoviesUrl = `${titlesByGenreUrl}sort_by=-year`;
+    const oldButGoldMoviesUrl = `${titlesByGenreUrl}imdb_score_min=8&sort_by=year`;
+
+    // Set best movie
     axios
-    .get(genresUrl)
+    .get(bestMoviesUrl)
     .then(function(response) {
-
-        // Set genre title
-        genreTitle.innerText = genre == null ? "All genres" : genre;
-
-        // Set URLs
-        let bestMoviesUrlPage1 = `${titlesUrl}?sort_by=-imdb_score&page=1`;
-        let bestMoviesUrlPage2 = `${titlesUrl}?sort_by=-imdb_score&page=2`;
-        let popularMoviesUrlPage1 = `${titlesUrl}?sort_by=-votes&page=1`;
-        let popularMoviesUrlPage2 = `${titlesUrl}?sort_by=-votes&page=2`;
-        let unpopularButGoodMoviesUrlPage1 = `${titlesUrl}?imdb_score_min=8&sort_by=votes&page=1`;
-        let unpopularButGoodMoviesUrlPage2 = `${titlesUrl}?imdb_score_min=8&sort_by=votes&page=2`;
-        let frenchMoviesUrlPage1 = `${titlesUrl}?country=France&lang=French&sort_by=-imdb_score&page=1`;
-        let frenchMoviesUrlPage2 = `${titlesUrl}?country=France&lang=French&sort_by=-imdb_score&page=2`;
-        let recentMoviesUrlPage1 = `${titlesUrl}?sort_by=-year&page=1`;
-        let recentMoviesUrlPage2 = `${titlesUrl}?sort_by=-year&page=2`;
-        let oldMoviesUrlPage1 = `${titlesUrl}?imdb_score_min=8&sort_by=year&page=1`;
-        let oldMoviesUrlPage2 = `${titlesUrl}?imdb_score_min=8&sort_by=year&page=2`;
-        if (genre != null) {
-            bestMoviesUrlPage1 = `${titlesUrl}?genre=${genre}&sort_by=-imdb_score&page=1`;
-            bestMoviesUrlPage2 = `${titlesUrl}?genre=${genre}&sort_by=-imdb_score&page=2`;
-            popularMoviesUrlPage1 = `${titlesUrl}?genre=${genre}&sort_by=-votes&page=1`;
-            popularMoviesUrlPage2 = `${titlesUrl}?genre=${genre}&sort_by=-votes&page=2`;
-            unpopularButGoodMoviesUrlPage1 = `${titlesUrl}?genre=${genre}&imdb_score_min=8&sort_by=votes&page=1`;
-            unpopularButGoodMoviesUrlPage2 = `${titlesUrl}?genre=${genre}&imdb_score_min=8&sort_by=votes&page=2`;
-            frenchMoviesUrlPage1 = `${titlesUrl}?genre=${genre}&country=France&lang=French&sort_by=-imdb_score&page=1`;
-            frenchMoviesUrlPage2 = `${titlesUrl}?genre=${genre}&country=France&lang=French&sort_by=-imdb_score&page=2`;
-            recentMoviesUrlPage1 = `${titlesUrl}?genre=${genre}&sort_by=-year&page=1`;
-            recentMoviesUrlPage2 = `${titlesUrl}?genre=${genre}&sort_by=-year&page=2`;
-            oldMoviesUrlPage1 = `${titlesUrl}?genre=${genre}&imdb_score_min=8&sort_by=year&page=1`;
-            oldMoviesUrlPage2 = `${titlesUrl}?genre=${genre}&imdb_score_min=8&sort_by=year&page=2`;
-        }
-
-        // Set best movie
+        const bestMovieId = response.data.results[0]["id"];
         axios
-        .get(bestMoviesUrlPage1)
+        .get(`${titlesUrl}${bestMovieId}`)
         .then(function(response) {
-            const bestMovieId = response.data.results[0]["id"];
-            axios
-            .get(`${titlesUrl}${bestMovieId}`)
-            .then(function(response) {
-                const bestMovie = response.data;
-                bestMovieTitle.innerText = bestMovie["title"];
-                bestMoviePoster.src = bestMovie["image_url"];
-                bestMoviePoster.alt = bestMovie["title"];
-                bestMovieDescription.innerText = bestMovie["description"];
-                bestMovieModalTriggers = [bestMoviePoster, bestMovieButton]
-                bestMovieModalTriggers.forEach(trigger => {
-                    trigger.addEventListener("click", function() {
-                        openModal()
-                        setModalInfo(bestMovie)      
-                    })
+            const bestMovie = response.data;
+            bestMovieTitle.innerText = bestMovie["title"];
+            bestMoviePoster.src = bestMovie["image_url"];
+            bestMoviePoster.alt = bestMovie["title"];
+            bestMovieDescription.innerText = bestMovie["description"];
+            bestMovieModalTriggers = [bestMoviePoster, bestMovieButton]
+            bestMovieModalTriggers.forEach(trigger => {
+                trigger.addEventListener("click", function() {
+                    openModal()
+                    setModalInfo(bestMovie)      
                 })
             })
         })
-
-        // Set top 7 best movies
-        const top7BestMovieImages = document.querySelectorAll("#best-movies .movie-poster")
-        setTop7Movies(bestMoviesUrlPage1, bestMoviesUrlPage2, top7BestMovieImages)
-
-        // Set top 7 popular movies
-        const top7PopularMovieImages = document.querySelectorAll("#popular-movies .movie-poster")
-        setTop7Movies(popularMoviesUrlPage1, popularMoviesUrlPage2, top7PopularMovieImages)
-
-        // Set top 7 unpopular but good movies
-        const top7UnpopularButGoodMovieImages = document.querySelectorAll("#unpopular-but-good-movies .movie-poster")
-        setTop7Movies(unpopularButGoodMoviesUrlPage1, unpopularButGoodMoviesUrlPage2, top7UnpopularButGoodMovieImages)
-
-        // Set top 7 best french movies
-        const top7BestFrenchMovieImages = document.querySelectorAll("#french-movies .movie-poster")
-        setTop7Movies(frenchMoviesUrlPage1, frenchMoviesUrlPage2, top7BestFrenchMovieImages)
-
-        // Set top 7 recent movies
-        const top7RecentMovieImages = document.querySelectorAll("#recent-movies .movie-poster")
-        setTop7Movies(recentMoviesUrlPage1, recentMoviesUrlPage2, top7RecentMovieImages)
-
-        // Set top 7 old but gold movies
-        const top7OldMovieImages = document.querySelectorAll("#old-movies .movie-poster")
-        setTop7Movies(oldMoviesUrlPage1, oldMoviesUrlPage2, top7OldMovieImages)
-
     })
+
+
+    
+    setMovies(bestMoviesUrl, bestMoviesPosters)
+    setMovies(popularMoviesUrl, popularMoviesPosters)
+    setMovies(unpopularButGoodMoviesUrl, unpopularButGoodMoviesPosters)
+    setMovies(bestFrenchMoviesUrl, bestFrenchMoviesPosters)
+    setMovies(recentMoviesUrl, recentMoviesPosters)
+    setMovies(oldButGoldMoviesUrl, oldButGoldMoviesPosters)
 }
 
 // Set modal information
@@ -215,34 +205,39 @@ function setModalInfo(movie) {
     modalMovieReleaseDate.innerText = `Release date : ${movie["date_published"]}`;
 }
 
-// Set top 7 movies
-function setTop7Movies(moviesUrlPage1, moviesUrlPage2, top7MovieImages) {
+
+// Set movies
+function setMovies(moviesUrl, moviePosters) {
+    numberOfMovies = moviePosters.length
+    numberOfPages = Math.ceil(numberOfMovies / numberOfMoviesPerPage)
+    let moviesUrls = []
+    for (let pageIndex = 1; pageIndex <= numberOfPages; pageIndex++) {
+        moviesUrls.push(moviesUrl + `&page=${pageIndex}`)
+    }
+    numberOfMoviesLeft = numberOfMovies
+
     axios
-    .all([axios.get(moviesUrlPage1), axios.get(moviesUrlPage2)])
+    .all([axios.get(moviesUrls[0]), axios.get(moviesUrls[1])])
     .then(axios.spread((...responses) => {
-        const top7MoviesPage1 = responses[0].data.results.slice(0, 6)
-        const top7MoviesPage2 = responses[1].data.results.slice(0, 2)
-        let top7MovieIds = []
-        top7MoviesPage1.forEach(movie => {
-            top7MovieIds.push(movie["id"])
-        })
-        top7MoviesPage2.forEach(movie => {
-            top7MovieIds.push(movie["id"])
-        })
-        top7MovieIds.forEach(function (movieId, index) {
-            axios
-            .get(`${titlesUrl}${movieId}`)
-            .then(function(response) {
-                const movie = response.data;
-                movieImage = top7MovieImages[index];
-                movieImage.src = movie["image_url"];
-                movieImage.alt = movie["title"];
-                movieImage.addEventListener("click", function() {
-                    openModal()
-                    setModalInfo(movie)      
+            movies = responses[0].data.results.slice(0, Math.min(numberOfMoviesLeft, numberOfMoviesPerPage))
+            let movieIds = []
+            movies.forEach(movie => {
+                movieIds.push(movie["id"])
+            })
+            movieIds.forEach(function (movieId, index) {
+                axios
+                .get(`${titlesUrl}${movieId}`)
+                .then(function(response) {
+                    const movie = response.data;
+                    moviePoster = moviePosters[index];
+                    moviePoster.src = movie["image_url"];
+                    moviePoster.alt = movie["title"];
+                    moviePoster.addEventListener("click", function() {
+                        openModal()
+                        setModalInfo(movie)      
+                    })
                 })
             })
-        })
     }))
 }
 

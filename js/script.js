@@ -47,6 +47,14 @@ const baseUrl = "http://127.0.0.1:8000/api/v1";
 const genresUrl = `${baseUrl}/genres/`;
 const titlesUrl = `${baseUrl}/titles/`;
 
+// Movies endpoints
+const bestMoviesEndpoint = "sort_by=-imdb_score";
+const popularMoviesEndpoint = "sort_by=-votes";
+const unpopularButGoodMoviesEndpoint = "imdb_score_min=8&sort_by=votes";
+const bestFrenchMoviesEndpoint = "country=France&lang=French&sort_by=-imdb_score";
+const recentMoviesEndpoint = "sort_by=-year";
+const oldButGoldMoviesEndpoint = "imdb_score_min=8&sort_by=year";
+
 function createGenresDropdown() {
     axios
     .get(genresUrl)
@@ -54,9 +62,9 @@ function createGenresDropdown() {
         let genres = response.data.results;
         genres.forEach(genre => {
             axios
-            .get(`${titlesUrl}?genre=${genre["name"]}&imdb_score_min=7`)
+            .get(`${titlesUrl}?genre=${genre["name"]}&imdb_score_min=8`)
             .then(function (response) {
-                if (response.data["count"] > 7) { // A genre must be associated with at least 8 movies
+                if (response.data["count"] > 10) {  // 5 movies per page, 2 pages max
                     genre_link = document.createElement("span");
                     genre_link.innerText = genre["name"];
                     dropdownContent.append(genre_link);
@@ -128,7 +136,7 @@ function setBestMovie(bestMoviesUrl) {
 }
 
 function setMovies(moviesUrl, moviePosters) {
-    numberOfMovies = Math.min(moviePosters.length, 10) // 5 movies per page, 2 pages
+    numberOfMovies = Math.min(moviePosters.length, 10) // 5 movies per page, 2 pages max
     moviesUrlPage1 = moviesUrl + "&page=1"
     moviesUrlPage2 = moviesUrl + "&page=2"
     axios
@@ -165,12 +173,12 @@ function setMovies(moviesUrl, moviePosters) {
 function setMoviesByGenre(genre=null) {
     genreTitle.innerText = genre == null ? "All genres" : genre;
     const titlesByGenreUrl = genre == null ? `${titlesUrl}?` : `${titlesUrl}?genre=${genre}&`
-    const bestMoviesUrl = `${titlesByGenreUrl}sort_by=-imdb_score`;
-    const popularMoviesUrl = `${titlesByGenreUrl}sort_by=-votes`;
-    const unpopularButGoodMoviesUrl = `${titlesByGenreUrl}imdb_score_min=8&sort_by=votes`;
-    const bestFrenchMoviesUrl = `${titlesByGenreUrl}country=France&lang=French&sort_by=-imdb_score`;
-    const recentMoviesUrl = `${titlesByGenreUrl}sort_by=-year`;
-    const oldButGoldMoviesUrl = `${titlesByGenreUrl}imdb_score_min=8&sort_by=year`;
+    const bestMoviesUrl = titlesByGenreUrl + bestMoviesEndpoint
+    const popularMoviesUrl = titlesByGenreUrl + popularMoviesEndpoint
+    const unpopularButGoodMoviesUrl = titlesByGenreUrl + unpopularButGoodMoviesEndpoint
+    const bestFrenchMoviesUrl = titlesByGenreUrl + bestFrenchMoviesEndpoint
+    const recentMoviesUrl = titlesByGenreUrl + recentMoviesEndpoint
+    const oldButGoldMoviesUrl = titlesByGenreUrl + oldButGoldMoviesEndpoint
     setBestMovie(bestMoviesUrl)
     setMovies(bestMoviesUrl, bestMoviesPosters)
     setMovies(popularMoviesUrl, popularMoviesPosters)
@@ -251,12 +259,10 @@ window.addEventListener("resize", function() {
 
 // Set all genres when home is clicked
 justStreamItLogo.addEventListener("click", function() {
-    genre = null;
-    setMoviesByGenre(genre);
+    setMoviesByGenre();
 })
 
 // Set all genres when logo is clicked
 home.addEventListener("click", function() {
-    genre = null;
-    setMoviesByGenre(genre);
+    setMoviesByGenre();
 })

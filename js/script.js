@@ -1,5 +1,5 @@
 // Navbar
-const logo = document.querySelector("#logo");
+const justStreamItLogo = document.querySelector("#juststreamit-logo");
 const home = document.querySelectorAll(".navbar-link")[0];
 const dropdownContent = document.querySelector(".dropdown__content");
 
@@ -91,7 +91,7 @@ axios
 })
 
 // Show all genres when home is clicked
-logo.addEventListener("click", function() {
+justStreamItLogo.addEventListener("click", function() {
     genre = null;
     showMoviesByGenre(genre);
 })

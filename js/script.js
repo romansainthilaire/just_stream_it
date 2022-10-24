@@ -191,11 +191,11 @@ function setMoviesByGenre(genre=null) {
 function setCarousels() {
     carousels.forEach(carousel => {
         const moviePostersList = carousel.querySelector('.carousel__movie-posters');
-        moviePostersList.style.transform = "translateX(0px)"
         const container = carousel.querySelector(".carousel > div")
         const containerWidth = container.offsetWidth
         const images = carousel.querySelectorAll('img');
         const imageWidth = images[0].offsetWidth
+        moviePostersList.style.transform = "translateX(0px)"
         if (window.innerWidth > 1400) {
             visibleImageNb = 4
         } else if (window.innerWidth > 1150) {

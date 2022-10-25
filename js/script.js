@@ -248,13 +248,13 @@ moviePosters.forEach(moviePoster => {
     });
 });
 
-// Show all genres when home is clicked
-justStreamItLogo.addEventListener("click", function() {
+// Show all genres when logo is clicked
+home.addEventListener("click", function() {
     setMoviesByGenre();
 });
 
-// Show all genres when logo is clicked
-home.addEventListener("click", function() {
+// Show all genres when home is clicked
+justStreamItLogo.addEventListener("click", function() {
     setMoviesByGenre();
 });
 

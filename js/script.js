@@ -69,7 +69,7 @@ function createGenresDropdown() {
                 if (response.data.count > 10) {  // 5 movies per page, 2 pages max
                     const genreLink = document.createElement("div");
                     genreLink.innerText = genre.name;
-                    genreLink.className = "genre"
+                    genreLink.className = "genre";
                     dropdownContent.append(genreLink);
                 }
                 const genreLinks = document.querySelectorAll(".dropdown__content .genre");
@@ -138,7 +138,7 @@ function setBestMovie(bestMoviesUrl) {
     });
 }
 
-function setMovies(moviesUrl, moviePosters) {
+function setCarouselMovies(moviesUrl, moviePosters) {
     const numberOfMovies = Math.min(moviePosters.length, 10); // 5 movies per page, 2 pages max
     const moviesUrlPage1 = moviesUrl + "&page=1";
     const moviesUrlPage2 = moviesUrl + "&page=2";
@@ -183,12 +183,12 @@ function setMoviesByGenre(genre=null) {
     const recentMoviesUrl = titlesByGenreUrl + recentMoviesEndpoint;
     const oldButGoldMoviesUrl = titlesByGenreUrl + oldButGoldMoviesEndpoint;
     setBestMovie(bestMoviesUrl);
-    setMovies(bestMoviesUrl, bestMoviesPosters);
-    setMovies(popularMoviesUrl, popularMoviesPosters);
-    setMovies(unpopularButGoodMoviesUrl, unpopularButGoodMoviesPosters);
-    setMovies(bestFrenchMoviesUrl, bestFrenchMoviesPosters);
-    setMovies(recentMoviesUrl, recentMoviesPosters);
-    setMovies(oldButGoldMoviesUrl, oldButGoldMoviesPosters);
+    setCarouselMovies(bestMoviesUrl, bestMoviesPosters);
+    setCarouselMovies(popularMoviesUrl, popularMoviesPosters);
+    setCarouselMovies(unpopularButGoodMoviesUrl, unpopularButGoodMoviesPosters);
+    setCarouselMovies(bestFrenchMoviesUrl, bestFrenchMoviesPosters);
+    setCarouselMovies(recentMoviesUrl, recentMoviesPosters);
+    setCarouselMovies(oldButGoldMoviesUrl, oldButGoldMoviesPosters);
 }
 
 function getVisibleMoviePosterNb() {

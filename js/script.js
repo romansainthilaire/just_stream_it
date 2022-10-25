@@ -64,7 +64,7 @@ function createGenresDropdown() {
         let genres = response.data.results;
         genres.forEach(genre => {
             axios
-            .get(`${titlesUrl}?genre=${genre.name}&imdb_score_min=8`)
+            .get(`${titlesUrl}?genre=${genre.name}&${bestFrenchMoviesEndpoint}`)
             .then(function (response) {
                 if (response.data.count > 10) {  // 5 movies per page, 2 pages max
                     const genreLink = document.createElement("span");

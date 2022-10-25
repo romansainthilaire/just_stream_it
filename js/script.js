@@ -97,12 +97,8 @@ function setModalInfo(movie) {
     modalMovieYear.innerText = movie.year;
     modalMovieDuration.innerText = movie.duration;
     modalMovieLongDescription.innerText = movie.long_description;
-    if (movie.image_url != null) {
-        try {
-            modalMoviePoster.src = movie.image_url;
-            modalMoviePoster.alt = movie.title;
-        } catch {}
-    }
+    modalMoviePoster.src = movie.image_url;
+    modalMoviePoster.alt = movie.title;
     modalMovieGenres.innerText = `Genre${movie.genres.length > 1 ? 's' : ''} : ` +
     movie.genres.toString().replaceAll(",", ", ").toLowerCase();
     modalMovieRated.innerText = `Rated : ${movie.rated}`;
@@ -128,12 +124,8 @@ function setBestMovie(bestMoviesUrl) {
         .then(function(response) {
             const bestMovie = response.data;
             bestMovieTitle.innerText = bestMovie.title;
-            if (bestMovie.image_url != null) {
-                try {
-                    bestMoviePoster.src = bestMovie.image_url;
-                    bestMoviePoster.alt = bestMovie.title;
-                } catch {}
-            }
+            bestMoviePoster.src = bestMovie.image_url;
+            bestMoviePoster.alt = bestMovie.title;
             bestMovieDescription.innerText = bestMovie.description;
             const bestMovieModalTriggers = [bestMoviePoster, bestMovieButton];
             bestMovieModalTriggers.forEach(trigger => {
@@ -169,12 +161,8 @@ function setCarouselMovies(moviesUrl, moviePosters) {
                     const movie = response.data;
                     if (index < numberOfMovies) {
                         const moviePoster = moviePosters[index];
-                        if (movie.image_url != null) {
-                            try {
-                                moviePoster.src = movie.image_url;
-                                moviePoster.alt = movie.title;
-                            } catch {}
-                        }
+                        moviePoster.src = movie.image_url;
+                        moviePoster.alt = movie.title;
                         moviePoster.addEventListener("click", function() {
                             openModal();
                             setModalInfo(movie);      
@@ -252,6 +240,14 @@ function setCarousels() {
 createGenresDropdown();
 setMoviesByGenre();
 setCarousels();
+
+// Set default movie poster if image_url not found
+moviePosters.forEach(moviePoster => {
+    moviePoster.addEventListener("error", function() {
+        moviePoster.src = "img/default-movie-poster.png";
+        moviePoster.alt = "Default movie poster";
+    });
+});
 
 // Show all genres when logo is clicked
 home.addEventListener("click", function() {

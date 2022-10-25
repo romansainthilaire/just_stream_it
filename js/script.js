@@ -240,7 +240,7 @@ createGenresDropdown();
 setMoviesByGenre();
 setCarousels();
 
-// Set default movie poster if error
+// Set default movie poster if image_url not found
 moviePosters.forEach(moviePoster => {
     moviePoster.addEventListener("error", function() {
         moviePoster.src = "img/default-movie-poster.png";
@@ -248,12 +248,12 @@ moviePosters.forEach(moviePoster => {
     });
 });
 
-// Set all genres when home is clicked
+// Show all genres when home is clicked
 justStreamItLogo.addEventListener("click", function() {
     setMoviesByGenre();
 });
 
-// Set all genres when logo is clicked
+// Show all genres when logo is clicked
 home.addEventListener("click", function() {
     setMoviesByGenre();
 });

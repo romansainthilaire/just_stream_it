@@ -1,23 +1,25 @@
+/* jshint esversion: 6 */
+
 // Navbar
 const justStreamItLogo = document.querySelector("#juststreamit-logo");
 const home = document.querySelector("#home");
 const dropdownContent = document.querySelector(".dropdown__content");
 
 // Genre title
-const genreTitle = document.querySelector("#genre")
+const genreTitle = document.querySelector("#genre");
 
 // Carousels
 const carousels = document.querySelectorAll('.carousel'); 
 
 // Movie posters
-const moviePosters = document.querySelectorAll(".movie-poster")
+const moviePosters = document.querySelectorAll(".movie-poster");
 const bestMoviePoster = document.querySelector(".best-movie .movie-poster");
-const bestMoviesPosters = document.querySelectorAll(".best-movies .movie-poster")
-const popularMoviesPosters = document.querySelectorAll(".popular-movies .movie-poster")
-const unpopularButGoodMoviesPosters = document.querySelectorAll(".unpopular-but-good-movies .movie-poster")
-const bestFrenchMoviesPosters = document.querySelectorAll(".best-french-movies .movie-poster")
-const recentMoviesPosters = document.querySelectorAll(".recent-movies .movie-poster")
-const oldButGoldMoviesPosters = document.querySelectorAll(".old-but-gold-movies .movie-poster")
+const bestMoviesPosters = document.querySelectorAll(".best-movies .movie-poster");
+const popularMoviesPosters = document.querySelectorAll(".popular-movies .movie-poster");
+const unpopularButGoodMoviesPosters = document.querySelectorAll(".unpopular-but-good-movies .movie-poster");
+const bestFrenchMoviesPosters = document.querySelectorAll(".best-french-movies .movie-poster");
+const recentMoviesPosters = document.querySelectorAll(".recent-movies .movie-poster");
+const oldButGoldMoviesPosters = document.querySelectorAll(".old-but-gold-movies .movie-poster");
 
 // Best movie
 const bestMovieTitle = document.querySelector(".best-movie__title");
@@ -25,22 +27,22 @@ const bestMovieDescription = document.querySelector(".best-movie__description");
 const bestMovieButton = document.querySelector(".best-movie__button");
 
 // Modal
-const modal = document.querySelector(".modal")
-const modalCloseButton = document.querySelector(".modal__close-button")
-const modalMovieTitle = document.querySelector(".modal__movie-title")
-const modalMovieYear = document.querySelector(".modal__movie-year")
-const modalMovieDuration = document.querySelector(".modal__movie-duration")
-const modalMovieLongDescription = document.querySelector(".modal__movie-long-description")
-const modalMoviePoster = document.querySelector(".modal .movie-poster")
-const modalMovieGenres = document.querySelector(".modal__movie-genres")
-const modalMovieRated = document.querySelector(".modal__movie-rated")
-const modalMovieImdbScore = document.querySelector(".modal__movie-imdb-score")
-const modalMovieVotes = document.querySelector(".modal__movie-votes")
-const modalMovieDirectors = document.querySelector(".modal__movie-directors")
-const modalMovieActors = document.querySelector(".modal__movie-actors")
-const modalMovieCountries = document.querySelector(".modal__movie-countries")
-const modalMovieBudget = document.querySelector(".modal__movie-budget")
-const modalMovieReleaseDate = document.querySelector(".modal__movie-release-date")
+const modal = document.querySelector(".modal");
+const modalCloseButton = document.querySelector(".modal__close-button");
+const modalMovieTitle = document.querySelector(".modal__movie-title");
+const modalMovieYear = document.querySelector(".modal__movie-year");
+const modalMovieDuration = document.querySelector(".modal__movie-duration");
+const modalMovieLongDescription = document.querySelector(".modal__movie-long-description");
+const modalMoviePoster = document.querySelector(".modal .movie-poster");
+const modalMovieGenres = document.querySelector(".modal__movie-genres");
+const modalMovieRated = document.querySelector(".modal__movie-rated");
+const modalMovieImdbScore = document.querySelector(".modal__movie-imdb-score");
+const modalMovieVotes = document.querySelector(".modal__movie-votes");
+const modalMovieDirectors = document.querySelector(".modal__movie-directors");
+const modalMovieActors = document.querySelector(".modal__movie-actors");
+const modalMovieCountries = document.querySelector(".modal__movie-countries");
+const modalMovieBudget = document.querySelector(".modal__movie-budget");
+const modalMovieReleaseDate = document.querySelector(".modal__movie-release-date");
 
 // URLs
 const baseUrl = "http://127.0.0.1:8000/api/v1";
@@ -62,23 +64,23 @@ function createGenresDropdown() {
         let genres = response.data.results;
         genres.forEach(genre => {
             axios
-            .get(`${titlesUrl}?genre=${genre["name"]}&imdb_score_min=8`)
+            .get(`${titlesUrl}?genre=${genre.name}&imdb_score_min=8`)
             .then(function (response) {
-                if (response.data["count"] > 10) {  // 5 movies per page, 2 pages max
-                    genre_link = document.createElement("span");
-                    genre_link.innerText = genre["name"];
-                    dropdownContent.append(genre_link);
+                if (response.data.count > 10) {  // 5 movies per page, 2 pages max
+                    const genreLink = document.createElement("span");
+                    genreLink.innerText = genre.name;
+                    dropdownContent.append(genreLink);
                 }
-                genre_links = document.querySelectorAll(".dropdown__content span")
-                genre_links.forEach(genre_link => {
-                    genre_link.addEventListener("click", function() {
-                        genre = genre_link.innerText;
+                const genreLinks = document.querySelectorAll(".dropdown__content span");
+                genreLinks.forEach(genreLink => {
+                    genreLink.addEventListener("click", function() {
+                        genre = genreLink.innerText;
                         setMoviesByGenre(genre);
-                    })
-                })
-            })
-        })
-    })
+                    });
+                });
+            });
+        });
+    });
 }
 
 function openModal() {
@@ -90,149 +92,153 @@ function closeModal() {
 }
 
 function setModalInfo(movie) {
-    modalMovieTitle.innerText = movie["title"];
-    modalMovieYear.innerText = movie["year"];
-    modalMovieDuration.innerText = movie["duration"];
-    modalMovieLongDescription.innerText = movie["long_description"];
-    modalMoviePoster.src = movie["image_url"];
-    modalMoviePoster.alt = movie["title"];
-    modalMovieGenres.innerText = `Genre${movie["genres"].length > 1 ? 's' : ''} : ` +
-    movie["genres"].toString().replaceAll(",", ", ").toLowerCase();
-    modalMovieRated.innerText = `Rated : ${movie["rated"]}`;
-    modalMovieImdbScore.innerText = `IMDB Score : ${movie["imdb_score"]}`;
-    modalMovieVotes.innerText = `Votes : ${movie["votes"]}`
-    modalMovieDirectors.innerText = `Director${movie["directors"].length > 1 ? 's' : ''} : ` +
-    movie["directors"].toString().replaceAll(",", ", ");
-    modalMovieActors.innerText = `Actor${movie["actors"].length > 1 ? 's' : ''} : ` +
-    movie["actors"].toString().replaceAll(",", ", ");
-    modalMovieCountries.innerText = `Countr${movie["countries"].length > 1 ? 'ies' : 'y'} : ` +
-    movie["countries"].toString().replaceAll(",", ", ");
-    modalMovieBudget.innerText = `Budget : ${movie["budget"] == null ? "unknown" : movie["budget"] + " $"}`;
-    modalMovieReleaseDate.innerText = `Release date : ${movie["date_published"]}`;
+    modalMovieTitle.innerText = movie.title;
+    modalMovieYear.innerText = movie.year;
+    modalMovieDuration.innerText = movie.duration;
+    modalMovieLongDescription.innerText = movie.long_description;
+    modalMoviePoster.src = movie.image_url;
+    modalMoviePoster.alt = movie.title;
+    modalMovieGenres.innerText = `Genre${movie.genres.length > 1 ? 's' : ''} : ` +
+    movie.genres.toString().replaceAll(",", ", ").toLowerCase();
+    modalMovieRated.innerText = `Rated : ${movie.rated}`;
+    modalMovieImdbScore.innerText = `IMDB Score : ${movie.imdb_score}`;
+    modalMovieVotes.innerText = `Votes : ${movie.votes}`;
+    modalMovieDirectors.innerText = `Director${movie.directors.length > 1 ? 's' : ''} : ` +
+    movie.directors.toString().replaceAll(",", ", ");
+    modalMovieActors.innerText = `Actor${movie.actors.length > 1 ? 's' : ''} : ` +
+    movie.actors.toString().replaceAll(",", ", ");
+    modalMovieCountries.innerText = `Countr${movie.countries.length > 1 ? 'ies' : 'y'} : ` +
+    movie.countries.toString().replaceAll(",", ", ");
+    modalMovieBudget.innerText = `Budget : ${movie.budget == null ? "unknown" : movie.budget + " $"}`;
+    modalMovieReleaseDate.innerText = `Release date : ${movie.date_published}`;
 }
 
 function setBestMovie(bestMoviesUrl) {
     axios
     .get(bestMoviesUrl)
     .then(function(response) {
-        const bestMovieId = response.data.results[0]["id"];
+        const bestMovieId = response.data.results[0].id;
         axios
         .get(`${titlesUrl}${bestMovieId}`)
         .then(function(response) {
             const bestMovie = response.data;
-            bestMovieTitle.innerText = bestMovie["title"];
-            bestMoviePoster.src = bestMovie["image_url"];
-            bestMoviePoster.alt = bestMovie["title"];
-            bestMovieDescription.innerText = bestMovie["description"];
-            bestMovieModalTriggers = [bestMoviePoster, bestMovieButton]
+            bestMovieTitle.innerText = bestMovie.title;
+            bestMoviePoster.src = bestMovie.image_url;
+            bestMoviePoster.alt = bestMovie.title;
+            bestMovieDescription.innerText = bestMovie.description;
+            const bestMovieModalTriggers = [bestMoviePoster, bestMovieButton];
             bestMovieModalTriggers.forEach(trigger => {
                 trigger.addEventListener("click", function() {
-                    openModal()
-                    setModalInfo(bestMovie)      
-                })
-            })
-        })
-    })
+                    openModal();
+                    setModalInfo(bestMovie);     
+                });
+            });
+        });
+    });
 }
 
 function setMovies(moviesUrl, moviePosters) {
-    numberOfMovies = Math.min(moviePosters.length, 10) // 5 movies per page, 2 pages max
-    moviesUrlPage1 = moviesUrl + "&page=1"
-    moviesUrlPage2 = moviesUrl + "&page=2"
+    const numberOfMovies = Math.min(moviePosters.length, 10); // 5 movies per page, 2 pages max
+    const moviesUrlPage1 = moviesUrl + "&page=1";
+    const moviesUrlPage2 = moviesUrl + "&page=2";
     axios
     .all([axios.get(moviesUrlPage1), axios.get(moviesUrlPage2)])
     .then(axios.spread((...responses) => {
-            moviesPage1 = responses[0].data.results
-            moviesPage2 = responses[1].data.results
-            let movieIds = []
+            const moviesPage1 = responses[0].data.results;
+            const moviesPage2 = responses[1].data.results;
+            let movieIds = [];
             moviesPage1.forEach(movie => {
-                movieIds.push(movie["id"])
-            })
+                movieIds.push(movie.id);
+            });
             moviesPage2.forEach(movie => {
-                movieIds.push(movie["id"])
-            })
+                movieIds.push(movie.id);
+            });
             movieIds.forEach(function (movieId, index) {
                 axios
                 .get(`${titlesUrl}${movieId}`)
                 .then(function(response) {
                     const movie = response.data;
                     if (index < numberOfMovies) {
-                        moviePoster = moviePosters[index];
-                        moviePoster.src = movie["image_url"];
-                        moviePoster.alt = movie["title"];
+                        const moviePoster = moviePosters[index];
+                        moviePoster.src = movie.image_url;
+                        moviePoster.alt = movie.title;
                         moviePoster.addEventListener("click", function() {
-                            openModal()
-                            setModalInfo(movie)      
-                        })
+                            openModal();
+                            setModalInfo(movie);      
+                        });
                     }
-                })
-            })
-    }))
+                });
+            });
+    }));
 }
 
 function setMoviesByGenre(genre=null) {
     genreTitle.innerText = genre == null ? "All genres" : genre;
-    const titlesByGenreUrl = genre == null ? `${titlesUrl}?` : `${titlesUrl}?genre=${genre}&`
-    const bestMoviesUrl = titlesByGenreUrl + bestMoviesEndpoint
-    const popularMoviesUrl = titlesByGenreUrl + popularMoviesEndpoint
-    const unpopularButGoodMoviesUrl = titlesByGenreUrl + unpopularButGoodMoviesEndpoint
-    const bestFrenchMoviesUrl = titlesByGenreUrl + bestFrenchMoviesEndpoint
-    const recentMoviesUrl = titlesByGenreUrl + recentMoviesEndpoint
-    const oldButGoldMoviesUrl = titlesByGenreUrl + oldButGoldMoviesEndpoint
-    setBestMovie(bestMoviesUrl)
-    setMovies(bestMoviesUrl, bestMoviesPosters)
-    setMovies(popularMoviesUrl, popularMoviesPosters)
-    setMovies(unpopularButGoodMoviesUrl, unpopularButGoodMoviesPosters)
-    setMovies(bestFrenchMoviesUrl, bestFrenchMoviesPosters)
-    setMovies(recentMoviesUrl, recentMoviesPosters)
-    setMovies(oldButGoldMoviesUrl, oldButGoldMoviesPosters)
+    const titlesByGenreUrl = genre == null ? `${titlesUrl}?` : `${titlesUrl}?genre=${genre}&`;
+    const bestMoviesUrl = titlesByGenreUrl + bestMoviesEndpoint;
+    const popularMoviesUrl = titlesByGenreUrl + popularMoviesEndpoint;
+    const unpopularButGoodMoviesUrl = titlesByGenreUrl + unpopularButGoodMoviesEndpoint;
+    const bestFrenchMoviesUrl = titlesByGenreUrl + bestFrenchMoviesEndpoint;
+    const recentMoviesUrl = titlesByGenreUrl + recentMoviesEndpoint;
+    const oldButGoldMoviesUrl = titlesByGenreUrl + oldButGoldMoviesEndpoint;
+    setBestMovie(bestMoviesUrl);
+    setMovies(bestMoviesUrl, bestMoviesPosters);
+    setMovies(popularMoviesUrl, popularMoviesPosters);
+    setMovies(unpopularButGoodMoviesUrl, unpopularButGoodMoviesPosters);
+    setMovies(bestFrenchMoviesUrl, bestFrenchMoviesPosters);
+    setMovies(recentMoviesUrl, recentMoviesPosters);
+    setMovies(oldButGoldMoviesUrl, oldButGoldMoviesPosters);
+}
+
+function getVisibleMoviePosterNb() {
+    if (window.innerWidth < 750) {
+        return 1;
+    } else if (window.innerWidth < 1200) {
+        return 2;
+    } else if (window.innerWidth < 1400) {
+        return 3;
+    } else {
+        return 4;
+    }
 }
 
 function setCarousels() {
     carousels.forEach(carousel => {
-        const moviePostersList = carousel.querySelector('.carousel__movie-posters');
-        const container = carousel.querySelector(".carousel > div")
-        const containerWidth = container.offsetWidth
-        const images = carousel.querySelectorAll('img');
-        const imageWidth = images[0].offsetWidth
-        moviePostersList.style.transform = "translateX(0px)"
-        if (window.innerWidth > 1400) {
-            visibleImageNb = 4
-        } else if (window.innerWidth > 1150) {
-            visibleImageNb = 3
-        } else if (window.innerWidth > 950) {
-            visibleImageNb = 2
-        } else {
-            visibleImageNb = 1
-        }
-        imageMargin = (containerWidth - visibleImageNb * imageWidth) / (2 * visibleImageNb)
-        images.forEach(image => {
-            image.style.margin = `0 ${imageMargin}px`
-        })
-        let imagesSteps = 0;
+        const containerWidth = carousel.querySelector(".carousel__container").offsetWidth;
+        const moviePosterList = carousel.querySelector(".carousel__movie-poster-list");
+        const moviePosters = carousel.querySelectorAll('.movie-poster');
+        const moviePosterWidth = moviePosters[0].offsetWidth;
+        const visibleMoviePosterNb = getVisibleMoviePosterNb();
+        const moviePosterMargin = (containerWidth - visibleMoviePosterNb * moviePosterWidth) / (2 * visibleMoviePosterNb);
+        moviePosters.forEach(moviePoster => {
+            moviePoster.style.margin = `0 ${moviePosterMargin}px`;
+        });
+        moviePosterList.style.transform = `translateX(-5px)`;
+        let steps = 0;
         const prevButton = carousel.querySelectorAll(".carousel__button")[0];
         const nextButton = carousel.querySelectorAll(".carousel__button")[1];
         nextButton.addEventListener("click", function() {
-            if (imagesSteps < images.length - visibleImageNb) {
-                imagesSteps++;
-                moveimages();
+            const visibleMoviePosterNb = getVisibleMoviePosterNb();
+            if (steps < moviePosters.length - visibleMoviePosterNb) {
+                steps++;
+                moveMoviePosterList();
             }
-        })
+        });
         prevButton.addEventListener("click", function() {
-            if (imagesSteps > 0) {
-                imagesSteps--;
-                moveimages();
+            if (steps > 0) {
+                steps--;
+                moveMoviePosterList();
             }
-        })
-        function moveimages() {
-            moviePostersList.style.transform = `translateX(-${(imageWidth + 2 * imageMargin + 4) * imagesSteps}px)`;
-        }
-    })
+        });
+        function moveMoviePosterList() {
+            moviePosterList.style.transform = `translateX(-${(moviePosterWidth + 2 * moviePosterMargin + 5) * steps}px)`;
+        }  
+    });
 }
 
 createGenresDropdown();
 setMoviesByGenre();
-setCarousels()
+setCarousels();
 
 // Set default movie poster if error
 moviePosters.forEach(moviePoster => {
@@ -240,7 +246,7 @@ moviePosters.forEach(moviePoster => {
         moviePoster.src = "img/default-movie-poster.png";
         moviePoster.alt = "Default movie poster";
     });
-})
+});
 
 // Close modal if close button is clicked
 modalCloseButton.addEventListener('click', closeModal);
@@ -254,15 +260,15 @@ window.addEventListener('click', function(e) {
 
 // Set carousels when resize
 window.addEventListener("resize", function() {
-    setCarousels(carousels)
-})
+    setCarousels();
+});
 
 // Set all genres when home is clicked
 justStreamItLogo.addEventListener("click", function() {
     setMoviesByGenre();
-})
+});
 
 // Set all genres when logo is clicked
 home.addEventListener("click", function() {
     setMoviesByGenre();
-})
+});

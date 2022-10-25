@@ -207,13 +207,12 @@ button:hover {
     justify-content: center;
 }
 
-.carousel > div {
+.carousel__container {
     overflow: hidden;
-    max-width: 90%;
     margin: 0 50px;
 }
 
-.carousel__movie-posters {
+.carousel__movie-poster-list {
     transition: transform 0.3s;
     width: 10000px;
 }

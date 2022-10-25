@@ -6,7 +6,7 @@ Ce projet a été réalisé dans le cadre de la formation OpenClassrooms *Dével
 
 ## Présentation de l'application
 
-**JustStreamIt** est une application web permetant de visualiser un classement de films en fonction du genre et de la catégorie sélectionnée.
+**JustStreamIt** est une application web permettant de visualiser un classement de films en fonction du genre et de la catégorie sélectionnée.
 
 L'application utilise une API locale : [OCMovies-API](https://github.com/OpenClassrooms-Student-Center/OCMovies-API-EN-FR)
 

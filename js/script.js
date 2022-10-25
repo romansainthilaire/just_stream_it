@@ -248,6 +248,16 @@ moviePosters.forEach(moviePoster => {
     });
 });
 
+// Set all genres when home is clicked
+justStreamItLogo.addEventListener("click", function() {
+    setMoviesByGenre();
+});
+
+// Set all genres when logo is clicked
+home.addEventListener("click", function() {
+    setMoviesByGenre();
+});
+
 // Close modal if close button is clicked
 modalCloseButton.addEventListener('click', closeModal);
 
@@ -261,14 +271,4 @@ window.addEventListener('click', function(e) {
 // Set carousels when resize
 window.addEventListener("resize", function() {
     setCarousels();
-});
-
-// Set all genres when home is clicked
-justStreamItLogo.addEventListener("click", function() {
-    setMoviesByGenre();
-});
-
-// Set all genres when logo is clicked
-home.addEventListener("click", function() {
-    setMoviesByGenre();
 });

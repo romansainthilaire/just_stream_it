@@ -214,7 +214,7 @@ function setCarousels() {
         moviePosters.forEach(moviePoster => {
             moviePoster.style.margin = `0 ${moviePosterMargin}px`;
         });
-        moviePosterList.style.transform = `translateX(-5px)`;
+        moviePosterList.style.transform = window.innerWidth < 750 ? `translateX(0px)`: `translateX(-5px)`;
         let steps = 0;
         const prevButton = carousel.querySelectorAll(".carousel__button")[0];
         const nextButton = carousel.querySelectorAll(".carousel__button")[1];
@@ -232,7 +232,7 @@ function setCarousels() {
             }
         });
         function moveMoviePosterList() {
-            moviePosterList.style.transform = `translateX(-${(moviePosterWidth + 2 * moviePosterMargin + 5) * steps}px)`;
+            moviePosterList.style.transform = `translateX(-${(moviePosterWidth + 2 * moviePosterMargin + 4) * steps}px)`;
         }  
     });
 }

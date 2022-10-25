@@ -92,7 +92,7 @@ button:hover {
     height: 10px;
 }
 
-.dropdown__content span {
+.dropdown__content .genre {
     color: rgb(150, 150, 150);
     font-size: 20px;
     padding: 10px 10px 5px 10px;
@@ -100,12 +100,12 @@ button:hover {
     display: block;
 }
 
-.dropdown__content span:hover {
+.dropdown__content .genre:hover {
     color: white;
     cursor: pointer;
 }
 
-#genre {
+#selected-genre {
     text-transform: uppercase;
     margin: 80px 0;
     color:rgb(180, 180, 180);
@@ -290,7 +290,7 @@ footer {
         padding-bottom: 10px;
     }
 
-    .dropdown__content span {
+    .dropdown__content .genre {
         font-size: 17px;
     }
 
@@ -331,13 +331,13 @@ footer {
         margin-left: 10px;
     }
 
-    .dropdown__content span {
+    .dropdown__content .genre {
         padding: 5px;
     }
 
-    #genre {
-        font-size: 20px;
-        margin: 40px 0 30px 0;
+    #selected-genre {
+        font-size: 25px;
+        margin: 40px 0;
         text-underline-offset: 10px;
     }
 

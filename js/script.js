@@ -6,7 +6,7 @@ const home = document.querySelector("#home");
 const dropdownContent = document.querySelector(".dropdown__content");
 
 // Genre title
-const genreTitle = document.querySelector("#genre");
+const selectedGenre = document.querySelector("#selected-genre");
 
 // Carousels
 const carousels = document.querySelectorAll('.carousel'); 
@@ -67,11 +67,12 @@ function createGenresDropdown() {
             .get(`${titlesUrl}?genre=${genre.name}&${bestFrenchMoviesEndpoint}`)
             .then(function (response) {
                 if (response.data.count > 10) {  // 5 movies per page, 2 pages max
-                    const genreLink = document.createElement("span");
+                    const genreLink = document.createElement("div");
                     genreLink.innerText = genre.name;
+                    genreLink.className = "genre"
                     dropdownContent.append(genreLink);
                 }
-                const genreLinks = document.querySelectorAll(".dropdown__content span");
+                const genreLinks = document.querySelectorAll(".dropdown__content .genre");
                 genreLinks.forEach(genreLink => {
                     genreLink.addEventListener("click", function() {
                         genre = genreLink.innerText;
@@ -173,7 +174,7 @@ function setMovies(moviesUrl, moviePosters) {
 }
 
 function setMoviesByGenre(genre=null) {
-    genreTitle.innerText = genre == null ? "All genres" : genre;
+    selectedGenre.innerText = genre == null ? "All genres" : genre;
     const titlesByGenreUrl = genre == null ? `${titlesUrl}?` : `${titlesUrl}?genre=${genre}&`;
     const bestMoviesUrl = titlesByGenreUrl + bestMoviesEndpoint;
     const popularMoviesUrl = titlesByGenreUrl + popularMoviesEndpoint;

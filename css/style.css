@@ -8,11 +8,6 @@ img {
     cursor: pointer;
 }
 
-.movie-poster {
-    width: 200px;
-    height: 300px
-}
-
 button {
     color: rgb(200, 200, 200);
     background-color: rgb(30, 30, 30);
@@ -23,6 +18,11 @@ button:hover {
     cursor: pointer;
     color: white;
     background-color: rgb(20, 20, 20);
+}
+
+.movie-poster {
+    width: 200px;
+    height: 300px
 }
 
 #juststreamit-logo {
@@ -37,22 +37,6 @@ button:hover {
 #github-logo:hover {
     margin-top: 0;
     height: 60px;
-}
-
-.best-movie, .carousel {
-    background-color: rgb(50, 50, 50);
-    margin-bottom: 50px;
-    padding: 20px;
-    display: flex;
-}
-
-#genre {
-    text-transform: uppercase;
-    margin: 80px 0;
-    color:rgb(180, 180, 180);
-    text-align: center;
-    text-decoration: underline;
-    text-underline-offset: 15px;
 }
 
 .navbar {
@@ -107,6 +91,62 @@ button:hover {
 .dropdown__content span:hover {
     color: white;
     cursor: pointer;
+}
+
+#genre {
+    text-transform: uppercase;
+    margin: 80px 0;
+    color:rgb(180, 180, 180);
+    text-align: center;
+    text-decoration: underline;
+    text-underline-offset: 15px;
+}
+
+.best-movie, .carousel {
+    background-color: rgb(50, 50, 50);
+    margin-bottom: 50px;
+    padding: 20px;
+    display: flex;
+}
+
+.best-movie .movie-poster {
+    margin-right: 20px;
+}
+
+.best-movie__title {
+    font-size: 35px;
+    margin-top: 0;
+}
+
+.best-movie__description {
+    margin-bottom: 25px;
+}
+
+.best-movie__button {
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 17px;
+}
+
+.carousel {
+    justify-content: center;
+}
+
+.carousel__container {
+    overflow: hidden;
+    margin: 0 50px;
+}
+
+.carousel__movie-poster-list {
+    transition: transform 0.3s;
+    width: 10000px;
+}
+
+.carousel__button {
+    font-size: 20px;
+    margin: 120px 0;
+    padding: 5px 8px 3px 8px;
+    border-radius: 7px;
 }
 
 .modal {
@@ -184,46 +224,6 @@ button:hover {
     margin-bottom: 7px;
 }
 
-.best-movie .movie-poster {
-    margin-right: 20px;
-}
-
-.best-movie__title {
-    font-size: 35px;
-    margin-top: 0;
-}
-
-.best-movie__description {
-    margin-bottom: 25px;
-}
-
-.best-movie__button {
-    padding: 10px;
-    border-radius: 5px;
-    font-size: 17px;
-}
-
-.carousel {
-    justify-content: center;
-}
-
-.carousel__container {
-    overflow: hidden;
-    margin: 0 50px;
-}
-
-.carousel__movie-poster-list {
-    transition: transform 0.3s;
-    width: 10000px;
-}
-
-.carousel__button {
-    font-size: 20px;
-    margin: 120px 0;
-    padding: 5px 8px 3px 8px;
-    border-radius: 7px;
-}
-
 footer {
     border-top: 1px solid rgb(80, 80, 80);
     margin-top: 70px;
@@ -294,6 +294,27 @@ footer {
         text-align: center;
     }
 
+    .movie-poster {
+        width: 150px;
+        height: 225px
+    }
+
+    .navbar {
+        padding-top: 20px;
+        display: block;
+    }
+
+    .navbar__container {
+        margin-top: 20px;
+        display: block;
+    }
+
+    .navbar__link {
+        font-size: 20px;
+        margin-right: 20px;
+        padding-bottom: 20px;
+    }
+
     #home:hover {
         text-decoration: none;
     }
@@ -315,27 +336,6 @@ footer {
 
     .best-movie, .carousel {
         padding: 10px;
-    }
-
-    .movie-poster {
-        width: 150px;
-        height: 225px
-    }
-
-    .navbar {
-        padding-top: 20px;
-        display: block;
-    }
-
-    .navbar__container {
-        margin-top: 20px;
-        display: block;
-    }
-
-    .navbar__link {
-        font-size: 20px;
-        margin-right: 20px;
-        padding-bottom: 20px;
     }
 
     .best-movie {

@@ -221,6 +221,10 @@ button:hover {
     display: flex;
 }
 
+.modal .movie-poster {
+    cursor: initial;
+}
+
 .modal__movie-details-list {
     margin-top: 0;
     margin-left: 10px;

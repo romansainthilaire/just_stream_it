@@ -41,7 +41,7 @@ const modalMovieVotes = document.querySelector(".modal__movie-votes");
 const modalMovieDirectors = document.querySelector(".modal__movie-directors");
 const modalMovieActors = document.querySelector(".modal__movie-actors");
 const modalMovieCountries = document.querySelector(".modal__movie-countries");
-const modalMovieBudget = document.querySelector(".modal__movie-budget");
+const modalMovieGrossIncome = document.querySelector(".modal__movie-gross-income");
 const modalMovieReleaseDate = document.querySelector(".modal__movie-release-date");
 
 // URLs
@@ -103,15 +103,16 @@ function setModalInfo(movie) {
     movie.genres.toString().replaceAll(",", ", ").toLowerCase();
     modalMovieRated.innerText = `Rated : ${movie.rated}`;
     modalMovieImdbScore.innerText = `IMDB Score : ${movie.imdb_score}`;
-    modalMovieVotes.innerText = `Votes : ${movie.votes}`;
+    modalMovieVotes.innerText = `Votes : ${movie.votes.toLocaleString('fr-FR')}`;
     modalMovieDirectors.innerText = `Director${movie.directors.length > 1 ? 's' : ''} : ` +
     movie.directors.toString().replaceAll(",", ", ");
     modalMovieActors.innerText = `Actor${movie.actors.length > 1 ? 's' : ''} : ` +
     movie.actors.toString().replaceAll(",", ", ");
     modalMovieCountries.innerText = `Countr${movie.countries.length > 1 ? 'ies' : 'y'} : ` +
     movie.countries.toString().replaceAll(",", ", ");
-    modalMovieBudget.innerText = `Budget : ${movie.budget == null ? "unknown" : movie.budget + " $"}`;
-    modalMovieReleaseDate.innerText = `Release date : ${movie.date_published}`;
+    modalMovieGrossIncome.innerText = "Gross Income : " +
+    `${movie.worldwide_gross_income == null ? "unknown" : movie.worldwide_gross_income.toLocaleString('fr-FR') + " $"}`;
+    modalMovieReleaseDate.innerText = `Release Date : ${movie.date_published}`;
 }
 
 function setBestMovie(bestMoviesUrl) {

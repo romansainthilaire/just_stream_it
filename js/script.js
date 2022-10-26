@@ -58,6 +58,9 @@ const recentMoviesEndpoint = "sort_by=-year";
 const oldButGoldMoviesEndpoint = "imdb_score_min=8&sort_by=year";
 
 function createGenresDropdown() {
+    /**
+     * Creates a dropdown menu with all movie genres.
+     */
     axios
     .get(genresUrl)
     .then(function(response) {
@@ -66,7 +69,7 @@ function createGenresDropdown() {
             axios
             .get(`${titlesUrl}?genre=${genre.name}&${bestFrenchMoviesEndpoint}`)
             .then(function (response) {
-                if (response.data.count > 10) {  // 5 movies per page, 2 pages max
+                if (response.data.count > 10) {  // a genre must be associated with at least 10 movies
                     const genreLink = document.createElement("div");
                     genreLink.innerText = genre.name;
                     genreLink.className = "genre";
@@ -85,14 +88,23 @@ function createGenresDropdown() {
 }
 
 function openModal() {
+    /**
+     * Displays the modal.
+     */
     modal.style.display = 'block';
 }
 
 function closeModal() {
+    /**
+     * Hides the modal.
+     */
     modal.style.display = 'none';
 }
 
 function setModalInfo(movie) {
+    /**
+     * Sets movie details inside the modal.
+     */
     modalMovieTitle.innerText = movie.title;
     modalMovieYear.innerText = movie.year;
     modalMovieDuration.innerText = movie.duration;
@@ -116,6 +128,9 @@ function setModalInfo(movie) {
 }
 
 function setBestMovie(bestMoviesUrl) {
+    /**
+     * Sets best movie information.
+     */
     axios
     .get(bestMoviesUrl)
     .then(function(response) {
@@ -140,6 +155,9 @@ function setBestMovie(bestMoviesUrl) {
 }
 
 function setCarouselMovies(moviesUrl, moviePosters) {
+    /**
+     * Sets movie posters for all carousels.
+     */
     const numberOfMovies = Math.min(moviePosters.length, 10); // 5 movies per page, 2 pages max
     const moviesUrlPage1 = moviesUrl + "&page=1";
     const moviesUrlPage2 = moviesUrl + "&page=2";
@@ -175,6 +193,9 @@ function setCarouselMovies(moviesUrl, moviePosters) {
 }
 
 function setMoviesByGenre(genre=null) {
+    /**
+     * Sets all movies (best movie and carousel movies) by genre.
+     */
     selectedGenre.innerText = genre == null ? "All genres" : genre;
     const titlesByGenreUrl = genre == null ? `${titlesUrl}?` : `${titlesUrl}?genre=${genre}&`;
     const bestMoviesUrl = titlesByGenreUrl + bestMoviesEndpoint;
@@ -193,6 +214,9 @@ function setMoviesByGenre(genre=null) {
 }
 
 function getVisibleMoviePosterNb() {
+    /**
+     * Gets the number of visible movie posters according to the size of the window.
+     */
     if (window.innerWidth < 750) {
         return 1;
     } else if (window.innerWidth < 1200) {
@@ -205,6 +229,9 @@ function getVisibleMoviePosterNb() {
 }
 
 function setCarousels() {
+    /**
+     * Sets all carousels.
+     */
     carousels.forEach(carousel => {
         const containerWidth = carousel.querySelector(".carousel__container").offsetWidth;
         const moviePosterList = carousel.querySelector(".carousel__movie-poster-list");
@@ -238,11 +265,14 @@ function setCarousels() {
     });
 }
 
+// Genres dropdown is created
 createGenresDropdown();
+// Movies are displayed for all genres
 setMoviesByGenre();
+// Carousels are initialized
 setCarousels();
 
-// Set default movie poster if image_url not found
+// Sets default movie poster if image_url not found
 moviePosters.forEach(moviePoster => {
     moviePoster.addEventListener("error", function() {
         moviePoster.src = "img/default-movie-poster.png";
@@ -250,27 +280,27 @@ moviePosters.forEach(moviePoster => {
     });
 });
 
-// Show all genres when logo is clicked
+// Shows all genres when logo is clicked
 home.addEventListener("click", function() {
     setMoviesByGenre();
 });
 
-// Show all genres when home is clicked
+// Shows all genres when home is clicked
 justStreamItLogo.addEventListener("click", function() {
     setMoviesByGenre();
 });
 
-// Close modal if close button is clicked
+// Closes modal if close button is clicked
 modalCloseButton.addEventListener('click', closeModal);
 
-// Close modal if clic outside
+// Closes modal if clic outside
 window.addEventListener('click', function(e) {
     if (e.target == modal) {
         closeModal();
     }
 });
 
-// Set carousels when resize
+// Sets carousels when resize
 window.addEventListener("resize", function() {
     setCarousels();
 });
